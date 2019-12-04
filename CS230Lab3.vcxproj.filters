@@ -34,6 +34,12 @@
     <ClCompile Include="Source\Level2.cpp">
       <Filter>Game\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Sprite.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshHelper.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -50,6 +56,12 @@
     </ClInclude>
     <ClInclude Include="Source\Level2.h">
       <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sprite.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshHelper.h">
+      <Filter>High-Level API</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
