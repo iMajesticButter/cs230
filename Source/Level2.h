@@ -19,6 +19,16 @@
 
 //------------------------------------------------------------------------------
 
+namespace Beta {
+    class Mesh;
+    class Texture;
+}
+
+class SpriteSource;
+class Sprite;
+class Animator;
+class Animation;
+
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
@@ -58,6 +68,15 @@ namespace Levels {
 		unsigned lives;
 		unsigned maxHealth;
 		unsigned currentHealth;
+
+        Beta::Mesh* m_mesh;
+        Beta::Texture* m_tex;
+
+        Sprite* m_sprite;
+        SpriteSource* m_spriteSource;
+        Animator* m_animator;
+        Animation* m_animation;
+
 	};
 }
 

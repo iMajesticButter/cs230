@@ -69,10 +69,10 @@ public:
     Beta::Mesh* GetMesh();
 
     //! set the spriteSource
-    void SetSpriteSource(SpriteSource* spriteSource);
+    void SetSpriteSource(const SpriteSource* spriteSource);
 
     //! get the spriteSource
-    SpriteSource* GetSpriteSource();
+    const SpriteSource* GetSpriteSource();
 
     //! set the sprite color
     void SetColor(const Beta::Color& color);
@@ -103,7 +103,7 @@ private:
 
     //private variables
 
-    SpriteSource* m_spriteSource;
+    const SpriteSource* m_spriteSource;
     Beta::Mesh* m_mesh;
     Beta::Color m_color;
 

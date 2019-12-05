@@ -13,6 +13,7 @@
 
 #include "Sprite.h"
 #include "MeshHelper.h"
+#include "SpriteSource.h"
 
 //Sprite
 
@@ -39,7 +40,7 @@ void Sprite::Draw() {
     shader->Use();
 
     if (m_spriteSource != nullptr) {
-
+        m_spriteSource->UseTexture(m_frame, m_flipX, m_flipY, shader);
     } else {
         graphics->GetDefaultTexture().Use(Beta::Vector2D(), shader);
     }
@@ -93,12 +94,12 @@ Beta::Mesh* Sprite::GetMesh() {
 }
 
 //! set the spriteSource
-void Sprite::SetSpriteSource(SpriteSource* spriteSource) {
+void Sprite::SetSpriteSource(const SpriteSource* spriteSource) {
     m_spriteSource = spriteSource;
 }
 
 //! get the spriteSource
-SpriteSource* Sprite::GetSpriteSource() {
+const SpriteSource* Sprite::GetSpriteSource() {
     return m_spriteSource;
 }
 
