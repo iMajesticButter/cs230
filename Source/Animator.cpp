@@ -28,7 +28,7 @@ Animator::Animator(Sprite* sprite) :
   /param dt Change in time (in seconds) since the last game loop.
 */
 void Animator::Update(float dt) {
-    std::cout << "Animator::Update" << std::endl;
+    //std::cout << "Animator::Update" << std::endl;
 
     if (!m_running)
         return;
@@ -43,7 +43,7 @@ void Animator::Update(float dt) {
   /param oop Whether the animation should go back to the beginning after it reaches the end.
 */
 void Animator::Play(size_t animationIndex, float playbackSpeed, bool loop) {
-    std::cout << "Animator::Play" << std::endl;
+    //std::cout << "Animator::Play" << std::endl;
 
     if (animationIndex >= m_animationList.Size()) {
         return;

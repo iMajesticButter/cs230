@@ -30,6 +30,7 @@ namespace Beta {
 }
 
 class SpriteSource;
+class Transform;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -39,7 +40,7 @@ class Sprite {
 public:
 
     //! Constructor
-    Sprite(SpriteSource* spriteSource = nullptr, Beta::Mesh* mesh = nullptr);
+    Sprite(SpriteSource* spriteSource = nullptr, Beta::Mesh* mesh = nullptr, Transform* transform = nullptr);
 
     //! draw the sprite to the screen
     void Draw();
@@ -104,6 +105,8 @@ private:
     //private variables
 
     const SpriteSource* m_spriteSource;
+    Transform* m_transform;
+
     Beta::Mesh* m_mesh;
     Beta::Color m_color;
 

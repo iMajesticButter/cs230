@@ -49,6 +49,18 @@
     <ClCompile Include="Source\Animation.cpp">
       <Filter>High-Level API</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Matrix2DStudent.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Transform.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Behaviors.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -80,6 +92,18 @@
     </ClInclude>
     <ClInclude Include="Source\Animation.h">
       <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Matrix2DStudent.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Transform.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Behaviors.h">
+      <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

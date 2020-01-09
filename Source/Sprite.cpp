@@ -15,17 +15,20 @@
 #include "MeshHelper.h"
 #include "SpriteSource.h"
 
+#include "Matrix2DStudent.h"
+#include "Transform.h"
+
 //Sprite
 
 //! Constructor
-Sprite::Sprite(SpriteSource* spriteSource, Beta::Mesh* mesh) : m_spriteSource(spriteSource), m_mesh(mesh),
+Sprite::Sprite(SpriteSource* spriteSource, Beta::Mesh* mesh, Transform* transform) : m_spriteSource(spriteSource), m_transform(transform), m_mesh(mesh),
               m_color(Beta::Colors::White), m_shader(nullptr), m_flipX(false), m_flipY(false), m_frame(0) {
 }
 
 //! draw the sprite to the screen
 void Sprite::Draw() {
 
-    if (m_mesh == nullptr)
+    if (m_mesh == nullptr || m_transform == nullptr)
         return;
 
     auto graphics = EngineGetModule(Beta::GraphicsEngine);
@@ -47,12 +50,11 @@ void Sprite::Draw() {
 
     graphics->SetSpriteBlendColor(m_color);
 
-    //transformation matrix
-    Beta::Matrix2D translationMat = Beta::Matrix2D::TranslationMatrix(0, 0);
-    Beta::Matrix2D rotationMat = Beta::Matrix2D::RotationMatrixRadians(0);
-    Beta::Matrix2D scaleMat = Beta::Matrix2D::ScalingMatrix(1, 1);
+    CS230::Matrix2D transformMat = m_transform->GetMatrix();
 
-    graphics->SetTransform(translationMat * rotationMat * scaleMat);
+    //        -_-
+    // this is not great...
+    graphics->SetTransform(*(reinterpret_cast<Beta::Matrix2D*>(&transformMat)));
 
     //draw
     m_mesh->Draw();

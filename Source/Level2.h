@@ -28,6 +28,8 @@ class SpriteSource;
 class Sprite;
 class Animator;
 class Animation;
+class Transform;
+class RigidBody;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -65,10 +67,6 @@ namespace Levels {
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
-		unsigned lives;
-		unsigned maxHealth;
-		unsigned currentHealth;
-
         Beta::Mesh* m_mesh;
         Beta::Texture* m_tex;
 
@@ -76,6 +74,8 @@ namespace Levels {
         SpriteSource* m_spriteSource;
         Animator* m_animator;
         Animation* m_animation;
+        Transform* m_transform;
+        RigidBody* m_rb;
 
 	};
 }

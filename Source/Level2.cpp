@@ -12,14 +12,18 @@
 #include "stdafx.h"
 
 #include "Level2.h"
+#include "Level1.h"
 #include "Space.h"
 
 #include "SpriteSource.h"
 #include "Sprite.h"
+#include "Transform.h"
 
 #include "MeshHelper.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "RigidBody.h"
+#include "Behaviors.h"
 
 namespace Levels {
 	//------------------------------------------------------------------------------
@@ -27,7 +31,8 @@ namespace Levels {
 	//------------------------------------------------------------------------------
 
 	// Creates an instance of Level 2.
-	Level2::Level2() : Level("Level2"), lives(2), maxHealth(2) {
+	Level2::Level2() : Level("Level2"), 
+        m_animation(nullptr), m_animator(nullptr), m_mesh(nullptr), m_sprite(nullptr), m_spriteSource(nullptr), m_tex(nullptr), m_transform(nullptr), m_rb(nullptr) {
        
 	}
 
@@ -40,7 +45,7 @@ namespace Levels {
         m_tex = Beta::Texture::CreateTextureFromFile("Monkey.png");
         m_spriteSource = new SpriteSource(m_tex, "Monkey", 3, 5);
 
-        m_animation = new Animation("test", m_spriteSource, 8, 0, 0.0f);
+        m_animation = new Animation("test", m_spriteSource, 8, 0, 0.2f);
 
 
 	}
@@ -48,9 +53,10 @@ namespace Levels {
 	// Initialize the memory associated with Level 2.
 	void Level2::Initialize() {
 		std::cout << "Level2::Initialize" << std::endl;
-		currentHealth = maxHealth;
 
-        m_sprite = new Sprite(m_spriteSource, m_mesh);
+        m_transform = new Transform(Beta::Vector2D(0, 0), Beta::Vector2D(1, 1), 0.0f);
+        m_sprite = new Sprite(m_spriteSource, m_mesh, m_transform);
+        m_rb = new RigidBody(m_transform);
 
         m_animator = new Animator(m_sprite);
         size_t index = m_animator->AddAnimation(m_animation);
@@ -67,18 +73,20 @@ namespace Levels {
         m_sprite->Draw();
         m_animator->Update(dt);
 
-        if (!m_animator->IsDone())
-            return;
+        //level switching
+        Beta::Input* in = EngineGetModule(Beta::Input);
 
-        --currentHealth;
-        if (currentHealth <= 0) {
-            --lives;
-            if (lives <= 0) {
-                Beta::EngineCore::GetInstance().Stop();
-            } else {
-                GetSpace()->RestartLevel();
-            }
+        if (in->IsKeyDown('1')) {
+            GetSpace()->SetLevel<Level1>();
+        } else if (in->IsKeyDown('2')) {
+            GetSpace()->RestartLevel();
         }
+
+        Behaviors::UpdateMonkey(m_transform, m_rb);
+
+        m_rb->Update(dt);
+        m_rb->FixedUpdate(dt);
+
 	}
 
 	// Shutdown any memory associated with Level 2.
@@ -86,7 +94,9 @@ namespace Levels {
 		std::cout << "Level2::Shutdown" << std::endl;
 
         delete m_animator;
+        delete m_rb;
         delete m_sprite;
+        delete m_transform;
 	}
 
 	// Unload the resources associated with Level 2.

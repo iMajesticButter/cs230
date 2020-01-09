@@ -29,8 +29,8 @@ public:
     Animation(const std::string& name = "", const SpriteSource* spriteSource = nullptr, unsigned frameCount = 1, unsigned frameStart = 0, float frameDuration = 0.0f);
 
     //! Reset the current frame to 0 and return the starting frame.
-    unsigned Play() const;
-
+    virtual unsigned Play() const;
+    
     //! Get the current frame of the animation based on time.
     /*!
       /param dt The change in time since the last update.
@@ -39,7 +39,7 @@ public:
       /param isDone Output param. True if animation is on its last frame, false otherwise.
       /returns The frame in the sprite source for the current frame of the animation.
     */
-    unsigned GetCurrentFrameIndex(float dt, float playbackSpeed, bool looping, bool* isDone = nullptr) const;
+    virtual unsigned GetCurrentFrameIndex(float dt, float playbackSpeed, bool looping, bool* isDone = nullptr) const;
 
     //! Get the name of the animation.
     const std::string& GetName() const;

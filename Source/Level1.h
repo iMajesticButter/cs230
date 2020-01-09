@@ -22,6 +22,9 @@ namespace Beta {
 }
 
 class Sprite;
+class Transform;
+class RigidBody;
+
 
 //------------------------------------------------------------------------------
 
@@ -62,11 +65,12 @@ namespace Levels {
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
-		unsigned lives;
-
         Beta::Mesh* m_mesh;
 
         Sprite* m_sprite;
+        Transform* m_transform;
+        RigidBody* m_rb;
+
 	};
 }
 
