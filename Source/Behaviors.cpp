@@ -27,12 +27,12 @@
 
 namespace Behaviors {
     // ship movement settigs
-    const float TurnSpeed = 2.5f;
-    const float MoveThrust = 2.0f;
-    const float MaxSpeed = 5.0f;
+    const float TurnSpeed = 3.5f;
+    const float MoveThrust = 50.0f;
+    const float MaxSpeed = 2.0f;
     const float StoppingDistance = 1.0f;
     const float StoppingSpeed = 0.1f;
-    const float FaceingError = 0.1f;
+    const float FaceingError = 0.25f;
     const float drag = 2.0f;
 
     // Movement behavior for the triangle/ship.
@@ -62,6 +62,7 @@ namespace Behaviors {
         //to stop the triangle from snap-turning
         float speedFalloff = absDot < 1 ? absDot : 1;
 
+        
         if (dot < 0) {
             angVel = TurnSpeed * speedFalloff;
         } else if (dot > 0) {
@@ -70,19 +71,16 @@ namespace Behaviors {
 
         //movement
         if (absDot <= FaceingError) {
-            //stop turning
-            angVel = 0;
 
             //move if outside stopping distance
             if (transform->GetTranslation().Distance(mousePos) > StoppingDistance) {
-
                 rigidBody->AddForce(transform->Forward() * MoveThrust);
-
-                // limit speed
-                if (rigidBody->GetVelocity().Magnitude() > MoveThrust) {
-                    rigidBody->SetVelocity(rigidBody->GetVelocity().Normalized() * MoveThrust);
-                }
             }
+        }
+
+        // limit speed
+        if (rigidBody->GetVelocity().Magnitude() > MaxSpeed) {
+            rigidBody->SetVelocity(rigidBody->GetVelocity().Normalized() * MaxSpeed);
         }
 
         //rough drag
