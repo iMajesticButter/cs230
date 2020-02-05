@@ -56,9 +56,6 @@ namespace Levels {
 		//	 dt = Change in time (in seconds) since the last game loop.
 		void Update(float dt);
 
-		// Shutdown any memory associated with Level 2.
-		void Shutdown();
-
 		// Unload the resources associated with Level 2.
 		void Unload();
 
@@ -70,12 +67,8 @@ namespace Levels {
         Beta::Mesh* m_mesh;
         Beta::Texture* m_tex;
 
-        Sprite* m_sprite;
         SpriteSource* m_spriteSource;
-        Animator* m_animator;
         Animation* m_animation;
-        Transform* m_transform;
-        RigidBody* m_rb;
 
 	};
 }

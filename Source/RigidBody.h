@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include <Vector2D.h>
+#include "Component.h"
 
 //------------------------------------------------------------------------------
 
@@ -29,7 +30,7 @@ class Transform;
 // Public Structures:
 //------------------------------------------------------------------------------
 
-class RigidBody {
+class RigidBody : public Component {
 public:
     //------------------------------------------------------------------------------
     // Public Functions:
@@ -38,7 +39,10 @@ public:
     // Constructor
     // Params:
     //   transform - The transform of the object.
-    RigidBody(Transform* transform);
+    RigidBody();
+
+    // Initialize
+    void Initialize() override;
 
     // Reset acceleration.
     // Params:
@@ -113,7 +117,6 @@ private:
     // Previous position.  May be used for resolving collisions.
     Beta::Vector2D	m_oldTranslation;
 
-    // Transform component
-    Transform* m_transform;
+    COMPONENT_CLASS_DECLARATIONS(RigidBody)
 };
 //------------------------------------------------------------------------------

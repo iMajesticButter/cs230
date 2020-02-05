@@ -18,6 +18,8 @@
 
 #include <Color.h>
 
+#include "Component.h"
+
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -36,11 +38,14 @@ class Transform;
 // Public Structures:
 //------------------------------------------------------------------------------
 
-class Sprite {
+class Sprite : public Component {
 public:
 
     //! Constructor
-    Sprite(SpriteSource* spriteSource = nullptr, Beta::Mesh* mesh = nullptr, Transform* transform = nullptr);
+    Sprite(SpriteSource* spriteSource = nullptr, Beta::Mesh* mesh = nullptr);
+
+    //! Initialize
+    void Initialize() override;
 
     //! draw the sprite to the screen
     void Draw();
@@ -116,5 +121,7 @@ private:
     bool m_flipY;
 
     unsigned m_frame;
+
+    COMPONENT_CLASS_DECLARATIONS(Sprite)
 
 };

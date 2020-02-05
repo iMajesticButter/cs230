@@ -11,15 +11,19 @@
 
 #pragma once
 
+#include "Component.h"
 
 class Sprite;
 class Animation;
 
-class Animator {
+class Animator : public Component {
 public:
 
     //! Construct a new animation controller object.
-    Animator(Sprite* sprite_);
+    Animator();
+
+    //! Initialize
+    void Initialize() override;
 
     //! Update the animation.
     /*!
@@ -86,5 +90,7 @@ private:
 
     //! List of animations used by this controller
     Beta::Array<const Animation*> m_animationList;
+
+    COMPONENT_CLASS_DECLARATIONS(Animator)
 
 };

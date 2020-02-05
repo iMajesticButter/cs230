@@ -25,8 +25,13 @@
 // Constructor
 // Params:
 //   transform - The transform of the object.
-RigidBody::RigidBody(Transform* transform) : m_transform(transform), m_angularVelocity(0), m_velocity(0,0), m_inverseMass(1), m_forcesSum(0, 0) {
-    m_oldTranslation = m_transform->GetTranslation();
+RigidBody::RigidBody() : Component("RigidBody"), m_angularVelocity(0), m_velocity(0,0), m_inverseMass(1), m_forcesSum(0, 0) {
+
+}
+
+// Initialize
+void RigidBody::Initialize() {
+    m_oldTranslation = transform()->GetTranslation();
 }
 
 // Reset acceleration.
@@ -43,11 +48,11 @@ void RigidBody::Update(float dt) {
 //	 dt = Change in time (in seconds) since the last fixed update.
 void RigidBody::FixedUpdate(float dt) {
     m_velocity += m_acceleration * dt;
-    m_oldTranslation = m_transform->GetTranslation();
+    m_oldTranslation = transform()->GetTranslation();
 
-    m_transform->SetTranslation(m_oldTranslation + m_velocity * dt);
+    transform()->SetTranslation(m_oldTranslation + m_velocity * dt);
 
-    m_transform->SetRotation(m_transform->GetRotation() + m_angularVelocity * dt);
+    transform()->SetRotation(transform()->GetRotation() + m_angularVelocity * dt);
 }
 
 // Set the velocity of a rigid body.
@@ -106,3 +111,4 @@ const Beta::Vector2D& RigidBody::GetOldTranslation() const {
     return m_oldTranslation;
 }
 
+COMPONENT_CLASS_DEFINITIONS(RigidBody)

@@ -17,10 +17,15 @@
 #include "Animation.h"
 
 //! Construct a new animation controller object.
-Animator::Animator(Sprite* sprite) :
+Animator::Animator() : Component("Animator"),
     m_animationIndex(0), m_playbackSpeed(1.0f), m_running(false), m_looping(false),
-    m_done(false), m_sprite(sprite) {
+    m_done(false), m_sprite(nullptr) {
 
+}
+
+//! Initialize
+void Animator::Initialize() {
+    m_sprite = GetComponent<Sprite>();
 }
 
 //! Update the animation.
@@ -81,9 +86,9 @@ size_t Animator::GetCurrentAnimationIndex() const {
   /param name The name of the animation for which the index was requested.
   /returns The index of the given animation if it was found, or 0.
 */
-size_t Animator::GetAnimationIndex(const std::string& name) const {
+size_t Animator::GetAnimationIndex(const std::string& animationName) const {
     for (unsigned i = 0; i < m_animationList.Size(); ++i) {
-        if (m_animationList[i]->GetName() == name)
+        if (m_animationList[i]->GetName() == animationName)
             return i;
     }
     return 0;
@@ -104,3 +109,5 @@ bool Animator::IsDone() const {
 void Animator::SetPlaybackSpeed(float speed) {
     m_playbackSpeed = speed;
 }
+
+COMPONENT_CLASS_DEFINITIONS(Animator)

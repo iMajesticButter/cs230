@@ -13,13 +13,19 @@
   <ItemGroup>
     <ClCompile Include="Source\Animation.cpp" />
     <ClCompile Include="Source\Animator.cpp" />
+    <ClCompile Include="Source\Archetypes.cpp" />
     <ClCompile Include="Source\Behaviors.cpp" />
+    <ClCompile Include="Source\Component.cpp" />
+    <ClCompile Include="Source\GameObject.cpp" />
+    <ClCompile Include="Source\GameObjectManager.cpp" />
     <ClCompile Include="Source\Level.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
     <ClCompile Include="Source\Level2.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Matrix2DStudent.cpp" />
     <ClCompile Include="Source\MeshHelper.cpp" />
+    <ClCompile Include="Source\MonkeyMovement.cpp" />
+    <ClCompile Include="Source\PlayerShip.cpp" />
     <ClCompile Include="Source\RigidBody.cpp" />
     <ClCompile Include="Source\Space.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
@@ -28,29 +34,39 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\TimedDeath.cpp" />
     <ClCompile Include="Source\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Animator.h" />
+    <ClInclude Include="Source\Archetypes.h" />
     <ClInclude Include="Source\Behaviors.h" />
+    <ClInclude Include="Source\betaVector.h" />
+    <ClInclude Include="Source\Component.h" />
+    <ClInclude Include="Source\ComponentGameObjectTemplateFunctions.h" />
+    <ClInclude Include="Source\GameObject.h" />
+    <ClInclude Include="Source\GameObjectManager.h" />
     <ClInclude Include="Source\Level.h" />
     <ClInclude Include="Source\Level1.h" />
     <ClInclude Include="Source\Level2.h" />
     <ClInclude Include="Source\Matrix2DStudent.h" />
     <ClInclude Include="Source\MeshHelper.h" />
+    <ClInclude Include="Source\MonkeyMovement.h" />
+    <ClInclude Include="Source\PlayerShip.h" />
     <ClInclude Include="Source\RigidBody.h" />
     <ClInclude Include="Source\Space.h" />
     <ClInclude Include="Source\Sprite.h" />
     <ClInclude Include="Source\SpriteSource.h" />
     <ClInclude Include="Source\stdafx.h" />
+    <ClInclude Include="Source\TimedDeath.h" />
     <ClInclude Include="Source\Transform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{553D497C-DD10-4B3D-9F5A-CC4267744407}</ProjectGuid>
     <RootNamespace>CS230Lab3</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

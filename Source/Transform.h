@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include "Matrix2DStudent.h"
+#include "Component.h"
 
 //------------------------------------------------------------------------------
 
@@ -26,7 +27,7 @@
 // An example of the structure to be defined in Transform.h.
 // You are free to change the contents of this structure as long as you do not
 //   change the public method declarations declared in the header.
-class Transform {
+class Transform : public Component {
 public:
     //------------------------------------------------------------------------------
     // Public Functions:
@@ -43,7 +44,7 @@ public:
     //	 translation = World position of the object.
     //   scale		 = Width and height of the object.
     //   rotation	 = Rotation of the object about the z-axis.
-    Transform(Beta::Vector2D translation = Beta::Vector2D(), Beta::Vector2D scale = Beta::Vector2D(1, 1), float rotation = 0);
+    Transform(Beta::Vector2D translation = Beta::Vector2D(0.0f, 0.0f), Beta::Vector2D scale = Beta::Vector2D(1, 1), float rotation = 0);
 
     // Get the transform matrix, based upon translation, rotation and scale settings.
     // Returns:
@@ -124,5 +125,7 @@ private:
 
     // the left vector of the transform
     Beta::Vector2D m_left;
+
+    COMPONENT_CLASS_DECLARATIONS(Transform)
 };
 //------------------------------------------------------------------------------

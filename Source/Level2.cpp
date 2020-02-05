@@ -24,6 +24,7 @@
 #include "Animation.h"
 #include "RigidBody.h"
 #include "Behaviors.h"
+#include "Archetypes.h"
 
 namespace Levels {
 	//------------------------------------------------------------------------------
@@ -32,7 +33,7 @@ namespace Levels {
 
 	// Creates an instance of Level 2.
 	Level2::Level2() : Level("Level2"), 
-        m_animation(nullptr), m_animator(nullptr), m_mesh(nullptr), m_sprite(nullptr), m_spriteSource(nullptr), m_tex(nullptr), m_transform(nullptr), m_rb(nullptr) {
+        m_animation(nullptr), m_mesh(nullptr), m_spriteSource(nullptr), m_tex(nullptr) {
        
 	}
 
@@ -45,7 +46,7 @@ namespace Levels {
         m_tex = Beta::Texture::CreateTextureFromFile("Monkey.png");
         m_spriteSource = new SpriteSource(m_tex, "Monkey", 3, 5);
 
-        m_animation = new Animation("test", m_spriteSource, 8, 0, 0.2f);
+        m_animation = new Animation("test", m_spriteSource, 8, 0, 0.08f);
 
 
 	}
@@ -54,13 +55,8 @@ namespace Levels {
 	void Level2::Initialize() {
 		std::cout << "Level2::Initialize" << std::endl;
 
-        m_transform = new Transform(Beta::Vector2D(0, 0), Beta::Vector2D(1, 1), 0.0f);
-        m_sprite = new Sprite(m_spriteSource, m_mesh, m_transform);
-        m_rb = new RigidBody(m_transform);
+        GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateMonkey(m_mesh, m_spriteSource, m_animation));
 
-        m_animator = new Animator(m_sprite);
-        size_t index = m_animator->AddAnimation(m_animation);
-        m_animator->Play(index, 1.0f, true);
     }
 
 	// Update Level 1.
@@ -68,10 +64,7 @@ namespace Levels {
 	//	 dt = Change in time (in seconds) since the last game loop.
 	void Level2::Update(float dt) {
 		UNREFERENCED_PARAMETER(dt);
-		std::cout << "Level2::Update" << std::endl;
-
-        m_sprite->Draw();
-        m_animator->Update(dt);
+		//std::cout << "Level2::Update" << std::endl;
 
         //level switching
         Beta::Input* in = EngineGetModule(Beta::Input);
@@ -82,21 +75,6 @@ namespace Levels {
             GetSpace()->RestartLevel();
         }
 
-        Behaviors::UpdateMonkey(m_transform, m_rb);
-
-        m_rb->Update(dt);
-        m_rb->FixedUpdate(dt);
-
-	}
-
-	// Shutdown any memory associated with Level 2.
-	void Level2::Shutdown() {
-		std::cout << "Level2::Shutdown" << std::endl;
-
-        delete m_animator;
-        delete m_rb;
-        delete m_sprite;
-        delete m_transform;
 	}
 
 	// Unload the resources associated with Level 2.

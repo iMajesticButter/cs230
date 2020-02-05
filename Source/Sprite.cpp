@@ -21,8 +21,13 @@
 //Sprite
 
 //! Constructor
-Sprite::Sprite(SpriteSource* spriteSource, Beta::Mesh* mesh, Transform* transform) : m_spriteSource(spriteSource), m_transform(transform), m_mesh(mesh),
+Sprite::Sprite(SpriteSource* spriteSource, Beta::Mesh* mesh) : Component("Sprite"), m_spriteSource(spriteSource), m_transform(nullptr), m_mesh(mesh),
               m_color(Beta::Colors::White), m_shader(nullptr), m_flipX(false), m_flipY(false), m_frame(0) {
+}
+
+//! Initialize
+void Sprite::Initialize() {
+    m_transform = GetComponent<Transform>();
 }
 
 //! draw the sprite to the screen
@@ -144,3 +149,5 @@ void Sprite::SetShader(Beta::ShaderProgram* shader) {
 Beta::ShaderProgram* Sprite::GetShader() {
     return m_shader;
 }
+
+COMPONENT_CLASS_DEFINITIONS(Sprite)

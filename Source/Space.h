@@ -17,6 +17,8 @@
 
 #include "BetaObject.h"
 
+#include "GameObjectManager.h"
+
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -78,6 +80,9 @@ public:
 	// Restarts the current level (next level = current)
 	void RestartLevel();
 
+    // Retrieve the object manager
+    GameObjectManager& GetObjectManager();
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Functions:
@@ -93,6 +98,8 @@ private:
 	bool m_paused;
 	Level* m_currentLevel;
 	Level* m_nextLevel;
+
+    GameObjectManager m_objectManager;
 };
 
 //------------------------------------------------------------------------------

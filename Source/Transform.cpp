@@ -26,7 +26,7 @@
 // Params:
 //	 x = Initial world position on the x-axis.
 //	 y = Initial world position on the y-axis.
-Transform::Transform(float x, float y) : 
+Transform::Transform(float x, float y) : Component("Transform"),
        m_translation(x, y), isDirty(true), m_rotation(0), m_scale(1, 1) {
 
     CalculateDirectionVectors();
@@ -38,7 +38,7 @@ Transform::Transform(float x, float y) :
 //	 translation = World position of the object.
 //   scale		 = Width and height of the object.
 //   rotation	 = Rotation of the object about the z-axis.
-Transform::Transform(Beta::Vector2D translation, Beta::Vector2D scale, float rotation) :
+Transform::Transform(Beta::Vector2D translation, Beta::Vector2D scale, float rotation) : Component("Transform"),
        m_translation(translation), isDirty(true), m_rotation(rotation), m_scale(scale) {
 
     CalculateDirectionVectors();
@@ -136,3 +136,5 @@ void Transform::CalculateDirectionVectors() {
     m_forward = Beta::Vector2D(cos(m_rotation), sin(m_rotation));
     m_left = Beta::Vector2D(m_forward.y, -m_forward.x);
 }
+
+COMPONENT_CLASS_DEFINITIONS(Transform)

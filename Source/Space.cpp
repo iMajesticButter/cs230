@@ -19,7 +19,7 @@
 //------------------------------------------------------------------------------
 
 // Constructor(s)
-Space::Space(const std::string& name) : BetaObject(name), m_paused(false), m_currentLevel(nullptr), m_nextLevel(nullptr) {
+Space::Space(const std::string& name) : BetaObject(name), m_paused(false), m_currentLevel(nullptr), m_nextLevel(nullptr), m_objectManager(this) {
 
 }
 
@@ -32,15 +32,18 @@ Space::~Space() {
 // Params:
 //   dt = The change in time since the last call to this function.
 void Space::Update(float dt) {
-	std::cout << "Space::Update" << std::endl;
+	//std::cout << "Space::Update" << std::endl;
 
 	if (m_nextLevel != nullptr) {
 		ChangeLevel();
 	}
 
-	if (m_currentLevel != nullptr && !m_paused) {
-		m_currentLevel->Update(dt);
+	if (m_currentLevel != nullptr) {
+		m_currentLevel->Update(m_paused ? 0 : dt);
 	}
+
+    m_objectManager.Update(dt);
+
 }
 
 // Shuts down the object manager
@@ -52,6 +55,8 @@ void Space::Shutdown() {
 		delete m_currentLevel;
 		m_currentLevel = nullptr;
 	}
+
+    m_objectManager.Shutdown();
 }
 
 // Returns a boolean indicating whether objects in this space are paused.
@@ -86,6 +91,11 @@ void Space::RestartLevel() {
 	m_nextLevel = m_currentLevel;
 }
 
+// Retrieve the object manager
+GameObjectManager& Space::GetObjectManager() {
+    return m_objectManager;
+}
+
 //------------------------------------------------------------------------------
 // Private Functions:
 //------------------------------------------------------------------------------
@@ -95,9 +105,12 @@ void Space::ChangeLevel() {
 	bool restart = m_currentLevel == m_nextLevel;
 
 	if (m_currentLevel != nullptr) {
+        m_objectManager.Shutdown();
 		m_currentLevel->Shutdown();
-		if (!restart)
-			m_currentLevel->Unload();
+        if (!restart) {
+            m_objectManager.Unload();
+            m_currentLevel->Unload();
+        }
 	}
 
 	if (!restart) {
