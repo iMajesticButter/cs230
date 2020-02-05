@@ -35,7 +35,7 @@ namespace Beta
 		Vector2D direction;
 
 		// Normal of the line segment, precomputed from start and end.
-		Vector2D normal;
+		Vector2D circleNormal;
 	};
 
 	BE_API std::ostream& operator<<(std::ostream& os, const LineSegment& line);

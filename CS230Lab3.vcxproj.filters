@@ -85,6 +85,15 @@
     <ClCompile Include="Source\Archetypes.cpp">
       <Filter>High-Level API</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Collider.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Intersection2D.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Polygon.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -154,6 +163,18 @@
       <Filter>High-Level API</Filter>
     </ClInclude>
     <ClInclude Include="Source\ComponentGameObjectTemplateFunctions.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collider.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Intersection2D.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Polygon.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PolygonCollider.h">
       <Filter>High-Level API</Filter>
     </ClInclude>
   </ItemGroup>

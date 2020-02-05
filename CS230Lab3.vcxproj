@@ -15,9 +15,11 @@
     <ClCompile Include="Source\Animator.cpp" />
     <ClCompile Include="Source\Archetypes.cpp" />
     <ClCompile Include="Source\Behaviors.cpp" />
+    <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\Component.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GameObjectManager.cpp" />
+    <ClCompile Include="Source\Intersection2D.cpp" />
     <ClCompile Include="Source\Level.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
     <ClCompile Include="Source\Level2.cpp" />
@@ -26,6 +28,7 @@
     <ClCompile Include="Source\MeshHelper.cpp" />
     <ClCompile Include="Source\MonkeyMovement.cpp" />
     <ClCompile Include="Source\PlayerShip.cpp" />
+    <ClCompile Include="Source\Polygon.cpp" />
     <ClCompile Include="Source\RigidBody.cpp" />
     <ClCompile Include="Source\Space.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
@@ -43,10 +46,12 @@
     <ClInclude Include="Source\Archetypes.h" />
     <ClInclude Include="Source\Behaviors.h" />
     <ClInclude Include="Source\betaVector.h" />
+    <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\ComponentGameObjectTemplateFunctions.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GameObjectManager.h" />
+    <ClInclude Include="Source\Intersection2D.h" />
     <ClInclude Include="Source\Level.h" />
     <ClInclude Include="Source\Level1.h" />
     <ClInclude Include="Source\Level2.h" />
@@ -54,6 +59,8 @@
     <ClInclude Include="Source\MeshHelper.h" />
     <ClInclude Include="Source\MonkeyMovement.h" />
     <ClInclude Include="Source\PlayerShip.h" />
+    <ClInclude Include="Source\Polygon.h" />
+    <ClInclude Include="Source\PolygonCollider.h" />
     <ClInclude Include="Source\RigidBody.h" />
     <ClInclude Include="Source\Space.h" />
     <ClInclude Include="Source\Sprite.h" />
