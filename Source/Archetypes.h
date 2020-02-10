@@ -61,6 +61,29 @@ namespace Archetypes {
 	// Returns:
 	//	 A pointer to the newly constructed game object
 	GameObject* CreateMonkey(Beta::Mesh* mesh, SpriteSource* spriteSource, Animation* animation);
+
+    // Create the circle game object.
+    // Params:
+    //   mesh  = The mesh to use for the object's sprite.
+    //   spriteSource = The sprite source to use for the object.
+    // Returns:
+    //	 A pointer to the newly constructed game object
+    GameObject* CreateCircle(Beta::Mesh* mesh, SpriteSource* spriteSource);
+
+    // Create the point game object.
+    // Params:
+    //   mesh  = The mesh to use for the object's sprite.
+    //   spriteSource = The sprite source to use for the object.
+    // Returns:
+    //	 A pointer to the newly constructed game object
+    GameObject* CreatePoint(Beta::Mesh* mesh, SpriteSource* spriteSource);
+
+    // Create the rectangle game object.
+    // Params:
+    //   mesh  = The mesh to use for the object's sprite.
+    // Returns:
+    //	 A pointer to the newly constructed game object
+    GameObject* CreateRectangle(Beta::Mesh* mesh);
 }
 
 //----------------------------------------------------------------------------

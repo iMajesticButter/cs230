@@ -90,6 +90,13 @@ void RigidBody::SetMass(float mass) {
     m_inverseMass = 1 / mass;
 }
 
+// Get the mass of the rigid body.
+// Returns:
+//   The mass of the rigid body.
+float RigidBody::GetMass() {
+    return 1 / m_inverseMass;
+}
+
 // Add a force to the object.
 // Params:
 //	 force = A force vector with direction and magnitude.

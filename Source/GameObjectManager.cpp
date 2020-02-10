@@ -14,6 +14,9 @@
 #include "GameObjectManager.h"
 #include "Space.h"
 #include "GameObject.h"
+#include "Collider.h"
+#include "Transform.h"
+#include "RigidBody.h"
 
 //------------------------------------------------------------------------------
 // Public Functions:
@@ -166,6 +169,7 @@ void GameObjectManager::FixedUpdate(float dt) {
         for (int i = 0; i < m_activeObjects.Size(); ++i) {
             m_activeObjects[i]->FixedUpdate(m_fixedUpdateDt);
         }
+        CheckCollisions();
     }
 }
 
@@ -188,4 +192,100 @@ void GameObjectManager::Draw(void) {
     for (int i = 0; i < m_activeObjects.Size(); ++i) {
         m_activeObjects[i]->Draw();
     }
+}
+
+// Check collision between all objects
+void GameObjectManager::CheckCollisions() {
+
+    for (int i = 0; i < m_activeObjects.Size()-1; ++i) {
+        if (m_activeObjects[i]->IsDestroyed())
+            continue;
+
+        Collider* obj1Col = m_activeObjects[i]->GetComponent<Collider>();
+        if (obj1Col == nullptr)
+            continue;
+
+        std::cout << "check collision object: " << i << std::endl;
+
+        for (int j = i + 1; j < m_activeObjects.Size(); ++j) {
+            if (m_activeObjects[j]->IsDestroyed())
+                continue;
+
+            Collider* obj2Col = m_activeObjects[j]->GetComponent<Collider>();
+            if (obj2Col == nullptr)
+                continue;
+
+            std::cout << "and: " << j << std::endl;
+
+            Beta::Vector2D intersectVector = obj1Col->CheckCollision(*obj2Col);
+            
+            if (intersectVector.Magnitude() == 0) {
+                //no collision, return
+                continue;
+            }
+
+            // Resolve the collision
+            if (obj1Col->GetTriggerOnly() || obj2Col->GetTriggerOnly()) {
+                //one or more of the colliders are trigger-only, return
+                continue;
+            }
+
+            GameObject* obj1 = obj1Col->GetOwner();
+            GameObject* obj2 = obj2Col->GetOwner();
+
+            auto rb = obj1->GetComponent<RigidBody>();
+            auto rb2 = obj2->GetComponent<RigidBody>();
+
+            if (rb == nullptr && rb2 == nullptr) {
+                // Both objects are static, return
+                continue;
+            }
+
+            float obj1Vel = 0;
+            float obj1Mass = 10;
+            if (rb != nullptr) {
+                obj1Vel = rb->GetVelocity().DotProduct(intersectVector);
+                obj1Mass = rb->GetMass();
+            }
+
+            float obj2Vel = 0;
+            float obj2Mass = 10;
+            if (rb2 != nullptr) {
+                obj2Vel = rb2->GetVelocity().DotProduct(intersectVector);
+                obj2Mass = rb2->GetMass();
+            }
+
+            //move the object(s) so that there is no longer an intersection
+            if (rb != nullptr && rb2 != nullptr) {
+                if (obj2Mass > obj1Mass) {
+                    obj1->transform()->SetTranslation(obj1->transform()->GetTranslation() - intersectVector);
+                } else {
+                    obj2->transform()->SetTranslation(obj2->transform()->GetTranslation() + intersectVector);
+                }
+            } else if (rb != nullptr) {
+                obj1->transform()->SetTranslation(obj1->transform()->GetTranslation() - intersectVector);
+            } else {
+                obj2->transform()->SetTranslation(obj2->transform()->GetTranslation() + intersectVector);
+            }
+
+            //calculate final velocity along the intersect vector
+            //float massesSum = obj1Mass + obj2Mass;
+            float momentum = (obj1Mass * obj1Vel) + (obj2Mass + obj2Vel);
+
+            //float velocity = momentum / massesSum;
+
+            float v1 = (momentum - (obj2Mass * obj2Vel)) / obj1Mass;
+            float v2 = (momentum - (obj1Mass * obj1Vel)) / obj2Mass;
+
+            //apply this velocity along the intersect vector to the objects
+            if (rb != nullptr) {
+                rb->SetVelocity(rb->GetVelocity() - ((obj1Vel + v1) * intersectVector.Normalized()));
+            }
+            if (rb2 != nullptr) {
+                rb2->SetVelocity(rb2->GetVelocity() + ((obj2Vel + v2) * intersectVector.Normalized()));
+            }
+
+        }
+    }
+
 }

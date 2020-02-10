@@ -11,7 +11,6 @@
 
 #pragma once
 
-
 //------------------------------------------------------------------------------
 // Component Macros
 //------------------------------------------------------------------------------
@@ -22,18 +21,77 @@
 #define COMPONENT_CLASS_DECLARATIONS(type) public: \
 Component* Clone() const; \
 size_t GetType() const;\
-static size_t ComponentType;
+static size_t ComponentType;\
+virtual bool IsOfType(size_t t) override;\
 
 #define COMPONENT_CLASS_DEFINITIONS(type) \
 size_t type::ComponentType = std::hash<std::string>{}(TYPENAME_TO_STRING(type));\
-\
+size_t type::GetType() const {\
+    return type::ComponentType;\
+}\
 Component* type::Clone() const {\
  return new type(*this); \
 } \
+bool type::IsOfType(size_t t) {\
+    return t == type::ComponentType;\
+}\
+
+#define COMPONENT_ABSTRACT_CLASS_DECLARATIONS(type) public: \
+static size_t ComponentType;\
+size_t GetType() const;\
+virtual bool IsOfType(size_t t) override;
+
+#define COMPONENT_ABSTRACT_CLASS_DEFINITIONS(type) \
+size_t type::ComponentType = std::hash<std::string>{}(TYPENAME_TO_STRING(type));\
+size_t type::GetType() const {\
+    return type::ComponentType;\
+}\
 \
-size_t type::GetType() const { \
-    return type::ComponentType;            \
+bool type::IsOfType(size_t t) {\
+    return t == type::ComponentType;\
 }
+
+#define COMPONENT_SUBCLASS_DECLARATIONS(type) public: \
+Component* Clone() const; \
+size_t GetType() const;\
+static size_t ComponentType;\
+virtual bool IsOfType(size_t t) override;
+
+#define COMPONENT_SUBCLASS_DEFINITIONS(baseClassType, type) \
+size_t type::ComponentType = std::hash<std::string>{}(TYPENAME_TO_STRING(type));\
+size_t type::GetType() const {\
+    return type::ComponentType;\
+}\
+\
+bool type::IsOfType(size_t t) {\
+    if(t == type::ComponentType) {\
+        return true;\
+    }\
+    return baseClassType::IsOfType(t);\
+}\
+Component* type::Clone() const {\
+    \
+        return new type(*this); \
+} \
+
+#define COMPONENT_ABSTRACT_SUBCLASS_DECLARATIONS(type) public: \
+static size_t ComponentType;\
+size_t GetType() const;\
+virtual bool IsOfType(size_t t) override;
+
+#define COMPONENT_ABSTRACT_SUBCLASS_DEFINITIONS(baseClassType, type) \
+size_t type::ComponentType = std::hash<std::string>{}(TYPENAME_TO_STRING(type));\
+size_t type::GetType() const {\
+    return type::ComponentType;\
+}\
+\
+bool type::IsOfType(size_t t) {\
+    if(t == type::ComponentType) {\
+        return true;\
+    }\
+    return baseClassType::IsOfType(t);\
+}
+
 
 
 //------------------------------------------------------------------------------
@@ -76,6 +134,9 @@ public:
 
     // Retrieve components type hash
     virtual size_t GetType() const = 0;
+
+    // Test if a type is equal to this objects type
+    virtual bool IsOfType(size_t t) = 0;
 
     // Retrieves the component with the given name on the owner object if it exists.
     // Params:

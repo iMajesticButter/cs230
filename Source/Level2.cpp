@@ -13,6 +13,7 @@
 
 #include "Level2.h"
 #include "Level1.h"
+#include "Level3.h"
 #include "Space.h"
 
 #include "SpriteSource.h"
@@ -73,6 +74,8 @@ namespace Levels {
             GetSpace()->SetLevel<Level1>();
         } else if (in->IsKeyDown('2')) {
             GetSpace()->RestartLevel();
+        } else if (in->IsKeyDown('3')) {
+            GetSpace()->SetLevel<Level3>();
         }
 
 	}

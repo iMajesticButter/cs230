@@ -1,0 +1,83 @@
+//------------------------------------------------------------------------------
+//
+// File Name:	PointCollider.cpp
+// Author(s):	Brandon Wolenetz
+// Project:		lab 6 collision detection
+// Course:		WANIC VGP2 2019-2020
+//
+// Copyright © 2020 DigiPen (USA) Corporation.
+//
+//------------------------------------------------------------------------------
+
+#include "stdafx.h"
+
+#include "PointCollider.h"
+
+#include "Transform.h"
+#include "PolygonCollider.h"
+#include "CircleCollider.h"
+#include "Intersection2D.h"
+#include "Polygon.h"
+#include <Shapes2D.h>
+
+//default constructor
+PointCollider::PointCollider(Beta::Vector2D offset) : Collider(ColliderType::ColliderTypePoint), m_offset(offset) {
+    
+}
+
+// Draw collision shape
+void PointCollider::Draw() {
+    auto debug = EngineGetModule(Beta::DebugDraw);
+    debug->AddCircle(transform()->GetTranslation() + GetOffset(), 0.05f, Beta::Colors::Orange);
+}
+
+// Perform intersection test between two arbitrary colliders.
+// Params:
+//	 other = Reference to the second collider component.
+bool PointCollider::IsCollidingWith(const Collider& other) const {
+
+    Beta::Vector2D myPos = transform()->GetTranslation() + GetOffset();
+
+    switch (other.GetColliderType()) {
+        case ColliderType::ColliderTypeCircle:
+        {
+
+            CircleCollider* otherC = (CircleCollider*)&other;
+
+            Beta::Circle circle;
+            circle.center = otherC->transform()->GetTranslation() + otherC->GetOffset();
+            circle.radius = otherC->GetRadius();
+
+            return PointCircleIntersection(myPos, circle, m_intersectVector);
+        }
+        case ColliderType::ColliderTypePolygon:
+        {
+
+            PolygonCollider* otherP = (PolygonCollider*)&other;
+
+            PolygonColliderInfo polyinfo;
+            polyinfo.polyverts = otherP->GetTransformedVerts();
+
+            bool intersect = PointPolygonIntersection(myPos, polyinfo, m_intersectVector);
+            m_intersectVector = -m_intersectVector;
+            return intersect;
+        }
+        case ColliderType::ColliderTypePoint:
+        default:
+            break;
+    }
+    return false;
+}
+
+//set the colliders offset
+void PointCollider::SetOffset(Beta::Vector2D offset) {
+    m_offset = offset;
+}
+
+//get the colliders offset
+Beta::Vector2D PointCollider::GetOffset() const {
+    return Beta::Vector2D(transform()->GetScale().x * m_offset.x, transform()->GetScale().y * m_offset.y);
+}
+
+
+COMPONENT_SUBCLASS_DEFINITIONS(Collider, PointCollider)

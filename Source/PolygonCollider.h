@@ -12,6 +12,7 @@
 #pragma once
 
 #include "Collider.h"
+#include "Matrix2DStudent.h"
 
 class PolygonCollider : public Collider {
 public:
@@ -22,8 +23,11 @@ public:
     // Allocate a new collider component.
     PolygonCollider();
 
+    //this class is abstract
+    virtual ~PolygonCollider() = 0;
+
     // Set up collider verts
-    virtual void SetColliderVerts() = 0;
+    //virtual void SetColliderVerts() = 0;
 
     // Draw collision shape
     virtual void Draw() override;
@@ -33,11 +37,24 @@ public:
     //	 other = Reference to the second collider component.
     virtual bool IsCollidingWith(const Collider& other) const override;
 
+    // get a pointer to the array of transformed verts
+    Beta::Data::Vector<Beta::Vector2D>* GetTransformedVerts();
+
 
 private:
 
+    // check if the transform matrx has changed, if it has, update m_transformedVerts
+    void TransformVerts() const;
+
+    // a copy of the transform matrix to compare against
+    mutable CS230::Matrix2D m_oldMatrix;
+
     //vertecies
+    mutable Beta::Data::Vector<Beta::Vector2D> m_transformedVerts;
+
+protected: 
     Beta::Data::Vector<Beta::Vector2D> m_verts;
-    Beta::Data::Vector<Beta::Vector2D> m_transformedVerts;
+
+    COMPONENT_ABSTRACT_SUBCLASS_DECLARATIONS(PolygonCollider)
 
 };

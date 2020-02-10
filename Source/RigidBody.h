@@ -79,6 +79,11 @@ public:
     //   mass = The new mass of the rigid body.
     void SetMass(float mass);
 
+    // Get the mass of the rigid body.
+    // Returns:
+    //   The mass of the rigid body.
+    float GetMass();
+
     // Add a force to the object.
     // Params:
     //	 force = A force vector with direction and magnitude.

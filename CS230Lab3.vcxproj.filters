@@ -73,15 +73,6 @@
     <ClCompile Include="Source\GameObjectManager.cpp">
       <Filter>High-Level API</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerShip.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MonkeyMovement.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TimedDeath.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Archetypes.cpp">
       <Filter>High-Level API</Filter>
     </ClCompile>
@@ -92,6 +83,36 @@
       <Filter>High-Level API</Filter>
     </ClCompile>
     <ClCompile Include="Source\Polygon.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PolygonCollider.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BoxCollider.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level3.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimedDeath.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ScreenWrap.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerShip.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MonkeyMovement.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColorChange.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CircleCollider.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PointCollider.cpp">
       <Filter>High-Level API</Filter>
     </ClCompile>
   </ItemGroup>
@@ -147,19 +168,10 @@
     <ClInclude Include="Source\GameObjectManager.h">
       <Filter>High-Level API</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MonkeyMovement.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerShip.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
     <ClInclude Include="Source\betaVector.h">
       <Filter>utilitystuff</Filter>
     </ClInclude>
     <ClInclude Include="Source\Archetypes.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TimedDeath.h">
       <Filter>High-Level API</Filter>
     </ClInclude>
     <ClInclude Include="Source\ComponentGameObjectTemplateFunctions.h">
@@ -175,6 +187,33 @@
       <Filter>High-Level API</Filter>
     </ClInclude>
     <ClInclude Include="Source\PolygonCollider.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BoxCollider.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level3.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimedDeath.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ScreenWrap.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerShip.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MonkeyMovement.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColorChange.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CircleCollider.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PointCollider.h">
       <Filter>High-Level API</Filter>
     </ClInclude>
   </ItemGroup>

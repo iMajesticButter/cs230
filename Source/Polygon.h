@@ -19,6 +19,6 @@
 struct PolygonColliderInfo {
 public:
     Beta::Data::Vector<Beta::Vector2D>* polyverts;
-    CS230::Matrix2D* transform;
+    //CS230::Matrix2D* transform;
     //TODO: add a bounding box to the info
 };

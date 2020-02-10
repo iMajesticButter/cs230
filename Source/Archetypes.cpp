@@ -3,9 +3,9 @@
 // File Name:	Archetypes.h
 // Author(s):	Brandon Wolenetz
 // Project:		Project 2 : Object Management
-// Course:		WANIC VGP2 2018-2019
+// Course:		WANIC VGP2 2019-2020
 //
-// Copyright © 2018 DigiPen (USA) Corporation.
+// Copyright © 2020 DigiPen (USA) Corporation.
 //
 //------------------------------------------------------------------------------
 
@@ -24,6 +24,11 @@
 #include "TimedDeath.h"
 #include "Animator.h"
 #include "MonkeyMovement.h"
+#include "BoxCollider.h"
+#include "ColorChange.h"
+#include "ScreenWrap.h"
+#include "CircleCollider.h"
+#include "PointCollider.h"
 
 namespace Archetypes {
     //------------------------------------------------------------------------------
@@ -80,5 +85,64 @@ namespace Archetypes {
         monkey->AddComponent<MonkeyMovement>();
 
         return monkey;
+    }
+
+
+    // Create the circle game object.
+    // Params:
+    //   mesh  = The mesh to use for the object's sprite.
+    //   spriteSource = The sprite source to use for the object.
+    // Returns:
+    //	 A pointer to the newly constructed game object
+    GameObject* CreateCircle(Beta::Mesh* mesh, SpriteSource* spriteSource) {
+        GameObject* circle = new GameObject("Circle");
+
+        circle->AddComponent<Sprite>(spriteSource, mesh);
+        circle->AddComponent<RigidBody>();
+        circle->AddComponent<CircleCollider>();
+        circle->AddComponent<ColorChange>(Beta::Colors::Yellow, Beta::Colors::Red);
+        circle->AddComponent<ScreenWrap>();
+
+        return circle;
+    }
+
+    // Create the point game object.
+    // Params:
+    //   mesh  = The mesh to use for the object's sprite.
+    //   spriteSource = The sprite source to use for the object.
+    // Returns:
+    //	 A pointer to the newly constructed game object
+    GameObject* CreatePoint(Beta::Mesh* mesh, SpriteSource* spriteSource) {
+        GameObject* point = new GameObject("Point");
+
+        point->transform()->SetScale(Beta::Vector2D(0.1f, 0.1f));
+
+        point->AddComponent<Sprite>(spriteSource, mesh);
+        point->AddComponent<RigidBody>();
+        point->AddComponent<PointCollider>();
+        point->AddComponent<ColorChange>(Beta::Colors::Blue, Beta::Colors::Red);
+        point->AddComponent<ScreenWrap>();
+
+        return point;
+    }
+
+    // Create the rectangle game object.
+    // Params:
+    //   mesh  = The mesh to use for the object's sprite.
+    // Returns:
+    //	 A pointer to the newly constructed game object
+    GameObject* CreateRectangle(Beta::Mesh* mesh) {
+        GameObject* rect = new GameObject("Rectangle");
+
+        rect->transform()->SetScale(Beta::Vector2D(2.5f, 1.0f));
+
+        rect->AddComponent<Sprite>(nullptr, mesh);
+        rect->AddComponent<RigidBody>();
+        rect->AddComponent<BoxCollider>();
+        rect->AddComponent<ColorChange>(Beta::Colors::Green, Beta::Colors::Red);
+        rect->AddComponent<ScreenWrap>();
+
+        return rect;
+
     }
 }

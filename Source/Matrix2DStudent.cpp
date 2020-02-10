@@ -111,9 +111,23 @@ namespace CS230 {
     // Result = Mtx * Vec.
     Beta::Vector2D Matrix2D::operator*(const Beta::Vector2D& vec) const {
         float x = m[0][0] * vec.x + m[0][1] * vec.y + m[0][2];
-        float y = m[1][0] * vec.x + m[1][1] * vec.y + m[0][2];
+        float y = m[1][0] * vec.x + m[1][1] * vec.y + m[1][2];
         
         return Beta::Vector2D(x, y);
+    }
+
+    // return weather the matrix is the same as another matrix
+    bool Matrix2D::operator==(const Matrix2D& other) const {
+        return m[0][0] == other.m[0][0] && m[1][0] == other.m[1][0] && m[2][0] == other.m[2][0] &&
+               m[0][1] == other.m[0][1] && m[1][1] == other.m[1][1] && m[2][1] == other.m[2][1] &&
+               m[0][2] == other.m[0][2] && m[1][2] == other.m[1][2] && m[2][2] == other.m[2][2];
+    }
+
+    // return weather the matrix is different from another matrix
+    bool Matrix2D::operator!=(const Matrix2D& other) const {
+        return m[0][0] != other.m[0][0] || m[1][0] != other.m[1][0] || m[2][0] != other.m[2][0] ||
+               m[0][1] != other.m[0][1] || m[1][1] != other.m[1][1] || m[2][1] != other.m[2][1] ||
+               m[0][2] != other.m[0][2] || m[1][2] != other.m[1][2] || m[2][2] != other.m[2][2];
     }
 
     // access operator for the matrix

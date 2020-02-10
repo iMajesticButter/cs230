@@ -38,7 +38,7 @@
 // Params:
 //   type = The type of collider (see the ColliderType enum).
 Collider::Collider(ColliderType type) : Component("Collider"), 
-        m_handler(nullptr), m_rigidBody(nullptr), m_type(type), m_intersectVector(0,0) {
+        m_handler(nullptr), m_rigidBody(nullptr), m_type(type), m_intersectVector(0,0), m_triggerOnly(false) {
 
 }
 
@@ -50,7 +50,9 @@ void Collider::Initialize() {
 // Check if two objects are colliding and send collision events.
 // Params:
 //	 other = Reference to the second collider component.
-void Collider::CheckCollision(const Collider& other) {
+// Returns:
+//  the Minimum Translation Vector for this object for collision resolution
+Beta::Vector2D Collider::CheckCollision(const Collider& other) {
 
     m_intersectVector = Beta::Vector2D(0, 0);
 
@@ -63,6 +65,8 @@ void Collider::CheckCollision(const Collider& other) {
             other.m_handler(*other.GetOwner(), *GetOwner(), -m_intersectVector);
         }
     }
+
+    return m_intersectVector;
 
 }
 
@@ -78,5 +82,17 @@ ColliderType Collider::GetColliderType() const {
 void Collider::SetCollisionHandler(CollisionEventHandler handler) {
     m_handler = handler;
 }
+
+// Set if this collider is trigger only
+void Collider::SetTriggerOnly(bool triggerOnly) {
+    m_triggerOnly = triggerOnly;
+}
+
+// Get if this collider is trigger only
+bool Collider::GetTriggerOnly() {
+    return m_triggerOnly;
+}
+
+COMPONENT_ABSTRACT_CLASS_DEFINITIONS(Collider)
 
 //------------------------------------------------------------------------------

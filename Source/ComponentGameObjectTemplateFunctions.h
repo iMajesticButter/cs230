@@ -30,7 +30,7 @@
 template <class C>
 C* GameObject::GetComponent() {
     for (int i = 0; i < m_components.Size(); ++i) {
-        if (C::ComponentType == m_components[i]->GetType()) {
+        if (m_components[i]->IsOfType(C::ComponentType)) {
             return (C*)m_components[i];
         }
     }
@@ -43,7 +43,7 @@ void GameObject::RemoveComponent() {
         m_transform = nullptr;
     }
     for (int i = 0; i < m_components.Size(); ++i) {
-        if (C::ComponentType == m_components[i]->GetType()) {
+        if (m_components[i]->IsOfType(C::ComponentType)) {
             m_components.remove(i);
             return;
         }

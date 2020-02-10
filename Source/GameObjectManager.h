@@ -122,6 +122,9 @@ private:
 
 	// Draw all game objects in the active game object list.
 	void Draw(void) override;
+
+    // Check collision between all objects
+    void CheckCollisions();
 	
 	//------------------------------------------------------------------------------
 	// Private Variables:

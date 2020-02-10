@@ -63,7 +63,7 @@ public:
     // Check if two objects are colliding and send collision events.
     // Params:
     //	 other = Reference to the second collider component.
-    void CheckCollision(const Collider& other);
+    Beta::Vector2D CheckCollision(const Collider& other);
 
     // Perform intersection test between two arbitrary colliders.
     // Params:
@@ -79,12 +79,18 @@ public:
     //   handler = A pointer to the collision handler function.
     void SetCollisionHandler(CollisionEventHandler handler);
 
+    // Set if this collider is trigger only
+    void SetTriggerOnly(bool triggerOnly);
+
+    // Get if this collider is trigger only
+    bool GetTriggerOnly();
+
 protected:
     // Component pointers
     RigidBody* m_rigidBody;
 
     // Intersect vector
-    Beta::Vector2D m_intersectVector;
+    mutable Beta::Vector2D m_intersectVector;
 
 private:
     //------------------------------------------------------------------------------
@@ -96,6 +102,11 @@ private:
 
     // Function pointer for collision handler
     CollisionEventHandler m_handler;
+
+    // Is this collider a trigger only
+    bool m_triggerOnly;
+
+    COMPONENT_ABSTRACT_CLASS_DECLARATIONS(Collider)
 };
 
 //------------------------------------------------------------------------------

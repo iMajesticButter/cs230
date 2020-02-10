@@ -75,6 +75,12 @@ namespace CS230 {
         // Result = Mtx * Vec.
         Beta::Vector2D operator*(const Beta::Vector2D& vec) const;
 
+        // return weather the matrix is the same as another matrix
+        bool operator==(const Matrix2D& other) const;
+
+        // return weather the matrix is different from another matrix
+        bool operator!=(const Matrix2D& other) const;
+
         // access operator for the matrix
         float* operator[](int index);
 

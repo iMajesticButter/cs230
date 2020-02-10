@@ -48,8 +48,8 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 
 	// Game engine goes!
 	StartupSettings settings;
-	settings.windowWidth = 800;
-	settings.windowHeight = 600;
+	settings.windowWidth = 1000;
+	settings.windowHeight = 1000;
 	settings.framerateCap = 200;
 
 	engine.Start(settings);

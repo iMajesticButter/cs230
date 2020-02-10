@@ -51,10 +51,11 @@ Transform::Transform(Beta::Vector2D translation, Beta::Vector2D scale, float rot
 const CS230::Matrix2D& Transform::GetMatrix() const {
     using namespace CS230;
     if (isDirty) {
-        m_matrix = Matrix2D::TranslationMatrix(m_translation.x, m_translation.y) *
-                 Matrix2D::ScalingMatrix(m_scale.x, m_scale.y) * 
-                 Matrix2D::RotationMatrixRadians(m_rotation);
+        m_matrix = Matrix2D::TranslationMatrix(m_translation.x, m_translation.y) * 
+                   Matrix2D::RotationMatrixRadians(m_rotation) *
+                   Matrix2D::ScalingMatrix(m_scale.x, m_scale.y);
         isDirty = false;
+        //TODO: send some sort of event to tell all the objects components that the transform matrix has changed
     }
     return m_matrix;
 }
