@@ -28,6 +28,11 @@
 // Public Structures:
 //------------------------------------------------------------------------------
 
+
+MapCollision::MapCollision(bool bottom, bool top, bool left, bool right) {
+
+}
+
 // Collider class - Detects collisions between objects
 
 //------------------------------------------------------------------------------

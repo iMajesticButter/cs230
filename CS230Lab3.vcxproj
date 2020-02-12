@@ -18,6 +18,7 @@
     <ClCompile Include="Source\BoxCollider.cpp" />
     <ClCompile Include="Source\CircleCollider.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
+    <ClCompile Include="Source\ColliderTilemap.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\Component.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />

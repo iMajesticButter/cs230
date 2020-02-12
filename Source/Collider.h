@@ -37,12 +37,22 @@ typedef void(*CollisionEventHandler)(GameObject& callingObject, GameObject& othe
 enum class ColliderType {
     ColliderTypePoint,
     ColliderTypeCircle,
-    ColliderTypePolygon
+    ColliderTypePolygon,
+    ColliderTypeTilemap
 };
 
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
+
+// Booleans determining collision state for each side of the object.
+struct MapCollision {
+    MapCollision(bool bottom, bool top, bool left, bool right);
+    bool bottom;
+    bool top;
+    bool left;
+    bool right;
+};
 
 // Collider class - Detects collisions between objects
 class Collider : public Component {
