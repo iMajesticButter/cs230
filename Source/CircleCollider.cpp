@@ -27,9 +27,26 @@ m_offset(offset), m_radius(radius) {
 
 // Draw collision shape
 void CircleCollider::Draw() {
+#ifdef _DEBUG
+
     auto debug = EngineGetModule(Beta::DebugDraw);
 
     debug->AddCircle(transform()->GetTranslation() + GetOffset(), GetRadius(), Beta::Colors::Orange);
+
+    Beta::BoundingRectangle aabb = GetAABB();
+
+    Beta::Vector2D tl = aabb.center + Beta::Vector2D(+aabb.extents.x, +aabb.extents.y);
+    Beta::Vector2D tr = aabb.center + Beta::Vector2D(+aabb.extents.x, -aabb.extents.y);
+    Beta::Vector2D bl = aabb.center + Beta::Vector2D(-aabb.extents.x, +aabb.extents.y);
+    Beta::Vector2D br = aabb.center + Beta::Vector2D(-aabb.extents.x, -aabb.extents.y);
+
+    debug->AddLineToList(tl, tr, Beta::Colors::Violet);
+    debug->AddLineToList(tr, br, Beta::Colors::Violet);
+    debug->AddLineToList(br, bl, Beta::Colors::Violet);
+    debug->AddLineToList(bl, tl, Beta::Colors::Violet);
+    debug->EndLineList();
+
+#endif
 }
 
 // Perform intersection test between two arbitrary colliders.
@@ -104,6 +121,11 @@ void CircleCollider::SetRadius(float radius) {
 //get the colliders radius
 float CircleCollider::GetRadius() const {
     return m_radius * std::min(transform()->GetScale().x, transform()->GetScale().y);
+}
+
+// Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
+Beta::BoundingRectangle CircleCollider::GetAABB() {
+    return Beta::BoundingRectangle(transform()->GetTranslation() + GetOffset(), Beta::Vector2D(GetRadius(), GetRadius()));
 }
 
 COMPONENT_SUBCLASS_DEFINITIONS(Collider, CircleCollider)

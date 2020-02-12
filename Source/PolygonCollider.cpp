@@ -36,6 +36,7 @@ PolygonCollider::~PolygonCollider() {
 // Draw collision shape
 void PolygonCollider::Draw() {
     TransformVerts();
+#ifdef _DEBUG
 
     Beta::DebugDraw* debug = EngineGetModule(Beta::DebugDraw);
 
@@ -48,6 +49,17 @@ void PolygonCollider::Draw() {
 
     debug->EndLineList();
 
+    Beta::Vector2D tl = m_aabb.center + Beta::Vector2D(+m_aabb.extents.x, +m_aabb.extents.y);
+    Beta::Vector2D tr = m_aabb.center + Beta::Vector2D(+m_aabb.extents.x, -m_aabb.extents.y);
+    Beta::Vector2D bl = m_aabb.center + Beta::Vector2D(-m_aabb.extents.x, +m_aabb.extents.y);
+    Beta::Vector2D br = m_aabb.center + Beta::Vector2D(-m_aabb.extents.x, -m_aabb.extents.y);
+
+    debug->AddLineToList(tl, tr, Beta::Colors::Violet);
+    debug->AddLineToList(tr, br, Beta::Colors::Violet);
+    debug->AddLineToList(br, bl, Beta::Colors::Violet);
+    debug->AddLineToList(bl, tl, Beta::Colors::Violet);
+    debug->EndLineList();
+#endif
 }
 
 // Perform intersection test between two arbitrary colliders.
@@ -110,6 +122,7 @@ bool PolygonCollider::IsCollidingWith(const Collider& other) const {
 
 // get a pointer to the array of transformed verts
 Beta::Data::Vector<Beta::Vector2D>* PolygonCollider::GetTransformedVerts() {
+    TransformVerts();
     return &m_transformedVerts;
 }
 
@@ -117,18 +130,49 @@ Beta::Data::Vector<Beta::Vector2D>* PolygonCollider::GetTransformedVerts() {
 // Private Functions:
 //------------------------------------------------------------------------------
 
-// check if the transform matrx has changed, if it has, update m_transformedVerts
+// check if the transform matrx has changed, if it has, update m_transformedVerts and the aabb
 void PolygonCollider::TransformVerts() const {
     const CS230::Matrix2D& matrix = transform()->GetMatrix();
     if (matrix != m_oldMatrix || m_transformedVerts.Size() == 0) {
-        //re-calculate the transformed verts
+        //re-calculate the transformed verts and the aabb
         m_oldMatrix = matrix;
+        Beta::Vector2D center(0,0);
 
         m_transformedVerts.Clear();
         for (int i = 0; i < m_verts.Size(); ++i) {
-            m_transformedVerts.push_back(matrix * m_verts[i]);
+            //transform vertex
+            Beta::Vector2D transformed = matrix * m_verts[i];
+            m_transformedVerts.push_back(transformed);
+            
+            //aabb stuff
+            center += transformed;
+
         }
+
+        //calculate bounding box extents
+        center /= (float)m_verts.Size();
+
+        Beta::Vector2D extents(0, 0);
+
+        for (int i = 0; i < m_transformedVerts.Size(); ++i) {
+            float xDist = std::abs(center.x - m_transformedVerts[i].x);
+            float yDist = std::abs(center.y - m_transformedVerts[i].y);
+            if (xDist > extents.x) {
+                extents.x = xDist;
+            }
+            if (yDist > extents.y) {
+                extents.y = yDist;
+            }
+        }
+
+        m_aabb = Beta::BoundingRectangle(center, extents);
+
     }
+}
+
+// Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
+Beta::BoundingRectangle PolygonCollider::GetAABB() {
+    return m_aabb;
 }
 
 COMPONENT_ABSTRACT_SUBCLASS_DEFINITIONS(Collider, PolygonCollider)

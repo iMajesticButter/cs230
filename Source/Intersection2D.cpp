@@ -304,4 +304,26 @@ bool PolygonCircleIntersection(PolygonColliderInfo polygon, const Beta::Circle& 
 
 }
 
+// Check whether two axis-aligned-bounding-boxes intersect.
+// Params:
+//  aabb1 = the first aabb
+//  aabb2 = the second aabb
+// Returns:
+//  True if intersection, false otherwise.
+bool CheckAABBAABBIntersection(Beta::BoundingRectangle aabb1, Beta::BoundingRectangle aabb2) {
+    float x1Min = aabb1.center.x - aabb1.extents.x;
+    float x1Max = aabb1.center.x + aabb1.extents.x;
+
+    float y1Min = aabb1.center.y - aabb1.extents.y;
+    float y1Max = aabb1.center.y + aabb1.extents.y;
+
+    float x2Min = aabb2.center.x - aabb2.extents.x;
+    float x2Max = aabb2.center.x + aabb2.extents.x;
+
+    float y2Min = aabb2.center.y - aabb2.extents.y;
+    float y2Max = aabb2.center.y + aabb2.extents.y;
+
+    return((x1Max > x2Min&& x1Min < x2Max) && (y1Max > y2Min&& y1Min < y2Max));
+}
+
 //------------------------------------------------------------------------------

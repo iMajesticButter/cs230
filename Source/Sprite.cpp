@@ -21,19 +21,21 @@
 //Sprite
 
 //! Constructor
-Sprite::Sprite(SpriteSource* spriteSource, Beta::Mesh* mesh) : Component("Sprite"), m_spriteSource(spriteSource), m_transform(nullptr), m_mesh(mesh),
+Sprite::Sprite(SpriteSource* spriteSource, Beta::Mesh* mesh) : Component("Sprite"), m_spriteSource(spriteSource), m_mesh(mesh),
               m_color(Beta::Colors::White), m_shader(nullptr), m_flipX(false), m_flipY(false), m_frame(0) {
 }
 
 //! Initialize
 void Sprite::Initialize() {
-    m_transform = GetComponent<Transform>();
 }
 
 //! draw the sprite to the screen
 void Sprite::Draw() {
+    Draw(Beta::Vector2D(0, 0));
+}
+void Sprite::Draw(Beta::Vector2D offset) {
 
-    if (m_mesh == nullptr || m_transform == nullptr)
+    if (m_mesh == nullptr || transform() == nullptr)
         return;
 
     auto graphics = EngineGetModule(Beta::GraphicsEngine);
@@ -55,7 +57,8 @@ void Sprite::Draw() {
 
     graphics->SetSpriteBlendColor(m_color);
 
-    CS230::Matrix2D transformMat = m_transform->GetMatrix();
+    CS230::Matrix2D offsetMat = CS230::Matrix2D::TranslationMatrix(offset.x, offset.y);
+    CS230::Matrix2D transformMat = offsetMat * transform()->GetMatrix();
 
     //        -_-
     // this is not great...

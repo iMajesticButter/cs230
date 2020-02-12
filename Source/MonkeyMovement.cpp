@@ -84,16 +84,16 @@ void MonkeyMovement::MoveVertical() const {
 
     m_rigidBody->AddForce(m_gravity);
 
-    auto input = EngineGetModule(Beta::Input);
+    //auto input = EngineGetModule(Beta::Input);
 
-    if (transform()->GetTranslation().y <= m_groundHeight) {
+    /*if (transform()->GetTranslation().y <= m_groundHeight) {
         transform()->SetTranslation(Beta::Vector2D(transform()->GetTranslation().x, m_groundHeight));
         m_rigidBody->SetVelocity(Beta::Vector2D(m_rigidBody->GetVelocity().x, 0.0f));
 
         if (input->CheckHeld(' ')) {
             m_rigidBody->AddForce(Beta::Vector2D(0, m_monkeyJumpSpeed));
         }
-    }
+    }*/
 }
 
 COMPONENT_CLASS_DEFINITIONS(MonkeyMovement)

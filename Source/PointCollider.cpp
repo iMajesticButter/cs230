@@ -27,8 +27,24 @@ PointCollider::PointCollider(Beta::Vector2D offset) : Collider(ColliderType::Col
 
 // Draw collision shape
 void PointCollider::Draw() {
+#ifdef _DEBUG
     auto debug = EngineGetModule(Beta::DebugDraw);
     debug->AddCircle(transform()->GetTranslation() + GetOffset(), 0.05f, Beta::Colors::Orange);
+
+
+    Beta::BoundingRectangle aabb = GetAABB();
+
+    Beta::Vector2D tl = aabb.center + Beta::Vector2D(+aabb.extents.x, +aabb.extents.y);
+    Beta::Vector2D tr = aabb.center + Beta::Vector2D(+aabb.extents.x, -aabb.extents.y);
+    Beta::Vector2D bl = aabb.center + Beta::Vector2D(-aabb.extents.x, +aabb.extents.y);
+    Beta::Vector2D br = aabb.center + Beta::Vector2D(-aabb.extents.x, -aabb.extents.y);
+
+    debug->AddLineToList(tl, tr, Beta::Colors::Violet);
+    debug->AddLineToList(tr, br, Beta::Colors::Violet);
+    debug->AddLineToList(br, bl, Beta::Colors::Violet);
+    debug->AddLineToList(bl, tl, Beta::Colors::Violet);
+    debug->EndLineList();
+#endif
 }
 
 // Perform intersection test between two arbitrary colliders.
@@ -77,6 +93,11 @@ void PointCollider::SetOffset(Beta::Vector2D offset) {
 //get the colliders offset
 Beta::Vector2D PointCollider::GetOffset() const {
     return Beta::Vector2D(transform()->GetScale().x * m_offset.x, transform()->GetScale().y * m_offset.y);
+}
+
+// Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
+Beta::BoundingRectangle PointCollider::GetAABB() {
+    return Beta::BoundingRectangle(transform()->GetTranslation() + GetOffset(), Beta::Vector2D(0, 0));
 }
 
 

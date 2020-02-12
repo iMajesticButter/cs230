@@ -78,7 +78,7 @@ const Beta::Vector2D SpriteSource::GetUV(unsigned frameIndex) const {
     float Vsize = 1.0f / (float)m_numRows;
 
     float U = ((int)(frameIndex % m_numCols)) * Usize;
-    float V = ((int)(frameIndex / m_numRows)) * Vsize;
+    float V = ((int)(frameIndex / m_numCols)) * Vsize;
 
     return Beta::Vector2D(U, V);
 

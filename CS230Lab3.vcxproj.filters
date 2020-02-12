@@ -115,6 +115,12 @@
     <ClCompile Include="Source\PointCollider.cpp">
       <Filter>High-Level API</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Tilemap.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteTilemap.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -214,6 +220,15 @@
       <Filter>High-Level API</Filter>
     </ClInclude>
     <ClInclude Include="Source\PointCollider.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderTilemap.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteTilemap.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tilemap.h">
       <Filter>High-Level API</Filter>
     </ClInclude>
   </ItemGroup>

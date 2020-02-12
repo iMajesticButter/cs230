@@ -73,4 +73,12 @@ bool PolygonPolygonIntersection(PolygonColliderInfo poly1, PolygonColliderInfo p
 //   True if intersection, false otherwise.
 bool PolygonCircleIntersection(PolygonColliderInfo polygon, const Beta::Circle& circle, Beta::Vector2D& intersectVector);
 
+// Check whether two axis-aligned-bounding-boxes intersect.
+// Params:
+//  aabb1 = the first aabb
+//  aabb2 = the second aabb
+// Returns:
+//  True if intersection, false otherwise.
+bool CheckAABBAABBIntersection(Beta::BoundingRectangle aabb1, Beta::BoundingRectangle aabb2);
+
 //------------------------------------------------------------------------------

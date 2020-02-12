@@ -39,6 +39,9 @@ public:
     //get the colliders radius
     float GetRadius() const;
 
+    // Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
+    virtual Beta::BoundingRectangle GetAABB();
+
 private:
 
     Beta::Vector2D m_offset;

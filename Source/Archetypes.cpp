@@ -29,6 +29,9 @@
 #include "ScreenWrap.h"
 #include "CircleCollider.h"
 #include "PointCollider.h"
+#include "Tilemap.h"
+#include "SpriteTilemap.h"
+//#include "ColliderTilemap.h"
 
 namespace Archetypes {
     //------------------------------------------------------------------------------
@@ -145,4 +148,27 @@ namespace Archetypes {
         return rect;
 
     }
+
+    // Create a tilemap object
+    // Params:
+    //   mesh = The mesh to use for the sprite.
+    //   spriteSource = The sprite source to use for the sprite.
+    //   map = The map to use for tilemap related components.
+    // Returns:
+    //   A pointer to the newly constructed game object.
+    GameObject* CreateTilemapObject(Beta::Mesh* mesh, SpriteSource* spriteSource, Tilemap* map) {
+
+        GameObject* tmap = new GameObject("tilemap");
+
+        tmap->transform()->SetTranslation(Beta::Vector2D(-3.5f, 2.5f));
+        tmap->transform()->SetScale(Beta::Vector2D(1.0f, 1.0f));
+        //tmap->transform()->SetScale(Beta::Vector2D(0.25f, 0.25f));
+
+        tmap->AddComponent<SpriteTilemap>(mesh, spriteSource, map);
+        //tmap->AddComponent<ColliderTilemap>(map);
+
+        return tmap;
+
+    }
+
 }

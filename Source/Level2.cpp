@@ -26,6 +26,7 @@
 #include "RigidBody.h"
 #include "Behaviors.h"
 #include "Archetypes.h"
+#include "Tilemap.h"
 
 namespace Levels {
 	//------------------------------------------------------------------------------
@@ -34,7 +35,7 @@ namespace Levels {
 
 	// Creates an instance of Level 2.
 	Level2::Level2() : Level("Level2"), 
-        m_animation(nullptr), m_mesh(nullptr), m_spriteSource(nullptr), m_tex(nullptr) {
+        m_animation(nullptr), m_mesh(nullptr), m_mapMesh(nullptr), m_spriteSource(nullptr), m_mapSpriteSource(nullptr), m_tex(nullptr), m_mapTex(nullptr), m_tilemap(nullptr) {
        
 	}
 
@@ -49,6 +50,12 @@ namespace Levels {
 
         m_animation = new Animation("test", m_spriteSource, 8, 0, 0.08f);
 
+        m_tilemap = Tilemap::CreateTilemapFromFile("Level2.txt");
+
+        m_mapMesh = Beta::MeshHelper::CreateQuadMesh(Beta::Vector2D(1.0f/4.0f, 1.0f/3.0f));
+
+        m_mapTex = Beta::Texture::CreateTextureFromFile("Tilemap.png");
+        m_mapSpriteSource = new SpriteSource(m_mapTex, "tilemap", 4, 3);
 
 	}
 
@@ -57,6 +64,8 @@ namespace Levels {
 		std::cout << "Level2::Initialize" << std::endl;
 
         GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateMonkey(m_mesh, m_spriteSource, m_animation));
+
+        GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateTilemapObject(m_mapMesh, m_mapSpriteSource, m_tilemap));
 
     }
 
@@ -83,6 +92,12 @@ namespace Levels {
 	// Unload the resources associated with Level 2.
 	void Level2::Unload() {
 		std::cout << "Level2::Unload" << std::endl;
+
+        delete m_mapSpriteSource;
+        delete m_mapTex;
+        delete m_mapMesh;
+
+        delete m_tilemap;
 
         delete m_animation;
         delete m_spriteSource;

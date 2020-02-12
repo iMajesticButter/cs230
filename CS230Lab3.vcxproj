@@ -40,10 +40,12 @@
     <ClCompile Include="Source\Space.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
     <ClCompile Include="Source\SpriteSource.cpp" />
+    <ClCompile Include="Source\SpriteTilemap.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\Tilemap.cpp" />
     <ClCompile Include="Source\TimedDeath.cpp" />
     <ClCompile Include="Source\Transform.cpp" />
   </ItemGroup>
@@ -56,6 +58,7 @@
     <ClInclude Include="Source\BoxCollider.h" />
     <ClInclude Include="Source\CircleCollider.h" />
     <ClInclude Include="Source\Collider.h" />
+    <ClInclude Include="Source\ColliderTilemap.h" />
     <ClInclude Include="Source\ColorChange.h" />
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\ComponentGameObjectTemplateFunctions.h" />
@@ -78,7 +81,9 @@
     <ClInclude Include="Source\Space.h" />
     <ClInclude Include="Source\Sprite.h" />
     <ClInclude Include="Source\SpriteSource.h" />
+    <ClInclude Include="Source\SpriteTilemap.h" />
     <ClInclude Include="Source\stdafx.h" />
+    <ClInclude Include="Source\Tilemap.h" />
     <ClInclude Include="Source\TimedDeath.h" />
     <ClInclude Include="Source\Transform.h" />
   </ItemGroup>

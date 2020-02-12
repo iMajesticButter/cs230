@@ -17,6 +17,8 @@
 
 #include "Component.h"
 
+#include <Shapes2D.h>
+
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -84,6 +86,9 @@ public:
 
     // Get if this collider is trigger only
     bool GetTriggerOnly();
+
+    // Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
+    virtual Beta::BoundingRectangle GetAABB() = 0;
 
 protected:
     // Component pointers

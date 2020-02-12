@@ -40,6 +40,9 @@ public:
     // get a pointer to the array of transformed verts
     Beta::Data::Vector<Beta::Vector2D>* GetTransformedVerts();
 
+    // Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
+    virtual Beta::BoundingRectangle GetAABB();
+
 
 private:
 
@@ -51,6 +54,9 @@ private:
 
     //vertecies
     mutable Beta::Data::Vector<Beta::Vector2D> m_transformedVerts;
+
+    //axis-aligned-bounding-box
+    mutable Beta::BoundingRectangle m_aabb;
 
 protected: 
     Beta::Data::Vector<Beta::Vector2D> m_verts;

@@ -49,6 +49,7 @@ public:
 
     //! draw the sprite to the screen
     void Draw();
+    void Draw(Beta::Vector2D offset = Beta::Vector2D(0,0));
 
     //! set the sprite's alpha
     /*!
@@ -105,12 +106,11 @@ public:
     Beta::ShaderProgram* GetShader();
 
 
-private:
+protected:
 
     //private variables
 
     const SpriteSource* m_spriteSource;
-    Transform* m_transform;
 
     Beta::Mesh* m_mesh;
     Beta::Color m_color;

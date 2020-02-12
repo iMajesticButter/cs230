@@ -30,6 +30,7 @@ class Animator;
 class Animation;
 class Transform;
 class RigidBody;
+class Tilemap;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -67,8 +68,13 @@ namespace Levels {
         Beta::Mesh* m_mesh;
         Beta::Texture* m_tex;
 
+        Beta::Mesh* m_mapMesh;
+        Beta::Texture* m_mapTex;
+        SpriteSource* m_mapSpriteSource;
+
         SpriteSource* m_spriteSource;
         Animation* m_animation;
+        Tilemap* m_tilemap;
 
 	};
 }

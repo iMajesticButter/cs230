@@ -25,6 +25,7 @@ class GameObject;
 class Space;
 class SpriteSource;
 class Animation;
+class Tilemap;
 
 namespace Beta {
 	class Mesh;
@@ -84,6 +85,15 @@ namespace Archetypes {
     // Returns:
     //	 A pointer to the newly constructed game object
     GameObject* CreateRectangle(Beta::Mesh* mesh);
+
+    // Create a tilemap object
+    // Params:
+    //   mesh = The mesh to use for the sprite.
+    //   spriteSource = The sprite source to use for the sprite.
+    //   map = The map to use for tilemap related components.
+    // Returns:
+    //   A pointer to the newly constructed game object.
+    GameObject* CreateTilemapObject(Beta::Mesh* mesh, SpriteSource* spriteSource, Tilemap* map);
 }
 
 //----------------------------------------------------------------------------

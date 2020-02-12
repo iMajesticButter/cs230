@@ -17,6 +17,7 @@
 #include "Collider.h"
 #include "Transform.h"
 #include "RigidBody.h"
+#include "Intersection2D.h"
 
 //------------------------------------------------------------------------------
 // Public Functions:
@@ -205,7 +206,7 @@ void GameObjectManager::CheckCollisions() {
         if (obj1Col == nullptr)
             continue;
 
-        std::cout << "check collision object: " << i << std::endl;
+        //std::cout << "check collision object: " << i << std::endl;
 
         for (int j = i + 1; j < m_activeObjects.Size(); ++j) {
             if (m_activeObjects[j]->IsDestroyed())
@@ -215,7 +216,11 @@ void GameObjectManager::CheckCollisions() {
             if (obj2Col == nullptr)
                 continue;
 
-            std::cout << "and: " << j << std::endl;
+            //std::cout << "and: " << j << std::endl;
+
+            //check if axis aligned boundign boxes overlap and skip this check if not
+            if(!CheckAABBAABBIntersection(obj1Col->GetAABB(), obj2Col->GetAABB()))
+               continue;
 
             Beta::Vector2D intersectVector = obj1Col->CheckCollision(*obj2Col);
             
