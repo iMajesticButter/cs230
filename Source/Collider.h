@@ -100,6 +100,9 @@ public:
     // Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
     virtual Beta::BoundingRectangle GetAABB() = 0;
 
+    // Get the intersect vector
+    Beta::Vector2D GetIntersectVector() const;
+
 protected:
     // Component pointers
     RigidBody* m_rigidBody;

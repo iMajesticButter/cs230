@@ -29,7 +29,8 @@
 //------------------------------------------------------------------------------
 
 
-MapCollision::MapCollision(bool bottom, bool top, bool left, bool right) {
+MapCollision::MapCollision(bool bottom_, bool top_, bool left_, bool right_) : 
+        bottom(bottom_), top(top_), left(left_), right(right_) {
 
 }
 
@@ -96,6 +97,11 @@ void Collider::SetTriggerOnly(bool triggerOnly) {
 // Get if this collider is trigger only
 bool Collider::GetTriggerOnly() {
     return m_triggerOnly;
+}
+
+// Get the intersect vector
+Beta::Vector2D Collider::GetIntersectVector() const {
+    return m_intersectVector;
 }
 
 COMPONENT_ABSTRACT_CLASS_DEFINITIONS(Collider)

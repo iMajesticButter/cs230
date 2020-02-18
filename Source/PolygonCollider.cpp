@@ -112,6 +112,13 @@ bool PolygonCollider::IsCollidingWith(const Collider& other) const {
                 return true;
             }
             m_intersectVector = Beta::Vector2D(0, 0);
+            break;
+        }
+        case ColliderType::ColliderTypeTilemap:
+        {
+            bool colliding = other.IsCollidingWith(*this);
+            m_intersectVector = -other.GetIntersectVector();
+            return colliding;
         }
         default:
             break;

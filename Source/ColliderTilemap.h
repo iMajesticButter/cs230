@@ -35,7 +35,7 @@ namespace Beta {
 //------------------------------------------------------------------------------
 
 // Enum for sides of bounding rectangle
-enum RectangleSide {
+enum class RectangleSide {
     SideBottom,
     SideTop,
     SideLeft,
@@ -118,7 +118,7 @@ private:
     //------------------------------------------------------------------------------
 
     // The tilemap
-    const Tilemap* map;
+    const Tilemap* m_map;
 
     COMPONENT_SUBCLASS_DECLARATIONS(ColliderTilemap)
 };

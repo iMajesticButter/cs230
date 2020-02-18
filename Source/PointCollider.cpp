@@ -67,16 +67,11 @@ bool PointCollider::IsCollidingWith(const Collider& other) const {
             return PointCircleIntersection(myPos, circle, m_intersectVector);
         }
         case ColliderType::ColliderTypePolygon:
+        case ColliderType::ColliderTypeTilemap:
         {
-
-            PolygonCollider* otherP = (PolygonCollider*)&other;
-
-            PolygonColliderInfo polyinfo;
-            polyinfo.polyverts = otherP->GetTransformedVerts();
-
-            bool intersect = PointPolygonIntersection(myPos, polyinfo, m_intersectVector);
-            m_intersectVector = -m_intersectVector;
-            return intersect;
+            bool colliding = other.IsCollidingWith(*this);
+            m_intersectVector = -other.GetIntersectVector();
+            return colliding;
         }
         case ColliderType::ColliderTypePoint:
         default:

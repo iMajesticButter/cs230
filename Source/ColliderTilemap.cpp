@@ -18,7 +18,7 @@
 //------------------------------------------------------------------------------
 
 // Constructor for Tilemap collider.
-ColliderTilemap::ColliderTilemap() : Collider(ColliderType::ColliderTypeTilemap) {
+ColliderTilemap::ColliderTilemap() : Collider(ColliderType::ColliderTypeTilemap), m_map(nullptr) {
 
 }
 
@@ -50,17 +50,18 @@ void ColliderTilemap::Draw() {
 // Returns:
 //	 Return the results of the collision check.
 bool ColliderTilemap::IsCollidingWith(const Collider& other) const {
-
+    UNREFERENCED_PARAMETER(other);
 
 
     m_intersectVector = Beta::Vector2D(0, 0);
+    return false;
 }
 
 // Sets the tilemap to use for this collider.
 // Params:
 //   map = A pointer to the tilemap resource.
 void ColliderTilemap::SetTilemap(const Tilemap* map) {
-
+    m_map = map;
 }
 
 
@@ -75,7 +76,9 @@ void ColliderTilemap::SetTilemap(const Tilemap* map) {
 // Returns:
 //   True if there is a collision, false otherwise.
 bool ColliderTilemap::IsSideColliding(const Beta::BoundingRectangle& rectangle, RectangleSide side) const {
-
+    UNREFERENCED_PARAMETER(rectangle);
+    UNREFERENCED_PARAMETER(side);
+    return false;
 }
 
 // Determines whether a point is within a collidable cell in the tilemap.
@@ -86,7 +89,9 @@ bool ColliderTilemap::IsSideColliding(const Beta::BoundingRectangle& rectangle, 
 //   False if the point is outside the map or the map is empty at that position, 
 //   or true if there is a tile at that position.
 bool ColliderTilemap::IsCollidingAtPosition(float x, float y) const {
-
+    UNREFERENCED_PARAMETER(x);
+    UNREFERENCED_PARAMETER(y);
+    return false;
 }
 
 // Moves an object and sets its velocity based on where it collided with the tilemap.
@@ -97,7 +102,10 @@ bool ColliderTilemap::IsCollidingAtPosition(float x, float y) const {
 //   collisions = True/false values from map collision checks.
 void ColliderTilemap::ResolveCollisions(const Beta::BoundingRectangle& objectRectangle, Transform* objectTransform,
                                         RigidBody* objectRigidBody, const MapCollision& collisions) const {
-
+    UNREFERENCED_PARAMETER(objectRectangle);
+    UNREFERENCED_PARAMETER(objectTransform);
+    UNREFERENCED_PARAMETER(objectRigidBody);
+    UNREFERENCED_PARAMETER(collisions);
 }
 
 // Returns the center of the next tile on the x-axis or y-axis.
@@ -108,12 +116,15 @@ void ColliderTilemap::ResolveCollisions(const Beta::BoundingRectangle& objectRec
 // Returns:
 //   The center of the next tile for the given position on the given side.
 float ColliderTilemap::GetNextTileCenter(RectangleSide side, float sidePosition) const {
-
+    UNREFERENCED_PARAMETER(side);
+    UNREFERENCED_PARAMETER(sidePosition);
+    return 0.0f;
 }
 
 // Get the colliders aabb
-Beta::BoundingRectangle GetAABB() {
-
+Beta::BoundingRectangle ColliderTilemap::GetAABB() {
+    Beta::BoundingRectangle rect;
+    return rect;
 }
 
 COMPONENT_SUBCLASS_DEFINITIONS(Collider, ColliderTilemap)
