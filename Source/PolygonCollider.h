@@ -41,7 +41,7 @@ public:
     Beta::Data::Vector<Beta::Vector2D>* GetTransformedVerts();
 
     // Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
-    virtual Beta::BoundingRectangle GetAABB();
+    virtual Beta::BoundingRectangle GetAABB() const;
 
 
 private:

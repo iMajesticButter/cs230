@@ -229,6 +229,8 @@ void GameObjectManager::CheckCollisions() {
                 continue;
             }
 
+            std::cout << "check" << std::endl;
+
             // Resolve the collision
             if (obj1Col->GetTriggerOnly() || obj2Col->GetTriggerOnly()) {
                 //one or more of the colliders are trigger-only, return

@@ -107,7 +107,7 @@ float CircleCollider::GetRadius() const {
 }
 
 // Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
-Beta::BoundingRectangle CircleCollider::GetAABB() {
+Beta::BoundingRectangle CircleCollider::GetAABB() const {
     return Beta::BoundingRectangle(transform()->GetTranslation() + GetOffset(), Beta::Vector2D(GetRadius(), GetRadius()));
 }
 

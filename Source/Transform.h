@@ -51,6 +51,11 @@ public:
     //	 A reference to the component's matrix structure
     const CS230::Matrix2D& GetMatrix() const;
 
+    // Get the inverse transform matrix, based upon translation, rotation and scale settings.
+    // Returns:
+    //   A reference to the component's inverse matrix structure
+    const CS230::Matrix2D& GetInverseMatrix() const;
+
     // Set the translation of a transform component.
     // Params:
     //	 translation = Reference to a translation vector.
@@ -94,8 +99,11 @@ public:
 private:
 
     //------------------------------------------------------------------------------
-    // Private Funcs:
+    // Private Functions:
     //------------------------------------------------------------------------------
+
+    // Calculate the matrix and inverse matrix.
+    void CalculateMatrices() const;
 
     // Calculate the forward and left vectors
     void CalculateDirectionVectors();
@@ -116,6 +124,9 @@ private:
     // The transformation matrix resulting from multiplying the 
     // translation, rotation, and scale matrices.
     mutable CS230::Matrix2D	m_matrix;
+
+    // The inverse of the transformation matrix.
+    mutable CS230::Matrix2D	m_inverseMatrix;
 
     // True if the transformation matrix needs to be recalculated.
     mutable bool isDirty;

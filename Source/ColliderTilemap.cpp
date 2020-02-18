@@ -12,6 +12,9 @@
 #include "stdafx.h"
 
 #include "ColliderTilemap.h"
+#include "RigidBody.h"
+#include "Transform.h"
+#include "Tilemap.h"
 
 //------------------------------------------------------------------------------
 // Public Functions:
@@ -19,7 +22,7 @@
 
 // Constructor for Tilemap collider.
 ColliderTilemap::ColliderTilemap() : Collider(ColliderType::ColliderTypeTilemap), m_map(nullptr) {
-
+    Collider::SetTriggerOnly(true);
 }
 
 // Debug drawing for colliders.
@@ -50,11 +53,46 @@ void ColliderTilemap::Draw() {
 // Returns:
 //	 Return the results of the collision check.
 bool ColliderTilemap::IsCollidingWith(const Collider& other) const {
-    UNREFERENCED_PARAMETER(other);
 
+    Beta::BoundingRectangle rect = other.GetAABB();
 
-    m_intersectVector = Beta::Vector2D(0, 0);
-    return false;
+    bool leftCol = IsSideColliding(rect, RectangleSide::SideLeft);
+    bool rightCol = IsSideColliding(rect, RectangleSide::SideRight);
+    bool topCol = IsSideColliding(rect, RectangleSide::SideTop);
+    bool bottomCol = IsSideColliding(rect, RectangleSide::SideBottom);
+
+    auto rb = other.GetOwner()->GetComponent<RigidBody>();
+    Beta::Vector2D oldTranslation = rb->GetOldTranslation();
+
+    if (topCol || bottomCol) {
+        other.transform()->SetTranslation(Beta::Vector2D(other.transform()->GetTranslation().x, oldTranslation.y));
+        rb->SetVelocity(Beta::Vector2D(rb->GetVelocity().x, 0));
+    }
+
+    if (leftCol || rightCol) {
+        other.transform()->SetTranslation(Beta::Vector2D(oldTranslation.x, other.transform()->GetTranslation().y));
+        rb->SetVelocity(Beta::Vector2D(0, rb->GetVelocity().y));
+    }
+
+    //calculate intersect vector
+    float intersectX = 0;
+    float intersectY = 0;
+
+    if (leftCol) {
+        ++intersectX;
+    }
+    if (rightCol) {
+        --intersectX;
+    }
+    if (topCol) {
+        --intersectY;
+    }
+    if (bottomCol) {
+        ++intersectY;
+    }
+
+    m_intersectVector = Beta::Vector2D(intersectX, intersectY) * 0.1f;
+    return leftCol || rightCol || topCol || bottomCol;
 }
 
 // Sets the tilemap to use for this collider.
@@ -76,8 +114,34 @@ void ColliderTilemap::SetTilemap(const Tilemap* map) {
 // Returns:
 //   True if there is a collision, false otherwise.
 bool ColliderTilemap::IsSideColliding(const Beta::BoundingRectangle& rectangle, RectangleSide side) const {
-    UNREFERENCED_PARAMETER(rectangle);
-    UNREFERENCED_PARAMETER(side);
+    
+    Beta::Vector2D spot1;
+    Beta::Vector2D spot2;
+
+    switch (side) {
+        case RectangleSide::SideBottom:
+            spot1 = Beta::Vector2D(rectangle.center.x + rectangle.extents.x * 0.9f, rectangle.bottom);
+            spot2 = Beta::Vector2D(rectangle.center.x - rectangle.extents.x * 0.9f, rectangle.bottom);
+            break;
+        case RectangleSide::SideTop:
+            spot1 = Beta::Vector2D(rectangle.center.x + rectangle.extents.x * 0.9f, rectangle.top);
+            spot2 = Beta::Vector2D(rectangle.center.x - rectangle.extents.x * 0.9f, rectangle.top);
+            break;
+        case RectangleSide::SideLeft:
+            spot1 = Beta::Vector2D(rectangle.left, rectangle.center.y + rectangle.extents.y * 0.9f);
+            spot2 = Beta::Vector2D(rectangle.left, rectangle.center.y - rectangle.extents.y * 0.9f);
+            break;
+        case RectangleSide::SideRight:
+            spot1 = Beta::Vector2D(rectangle.right, rectangle.center.y + rectangle.extents.y * 0.9f);
+            spot2 = Beta::Vector2D(rectangle.right, rectangle.center.y - rectangle.extents.y * 0.9f);
+            break;
+        default:
+            break;
+    }
+
+    if (IsCollidingAtPosition(spot1.x, spot1.y) || IsCollidingAtPosition(spot2.x, spot2.y)) {
+        return true;
+    }
     return false;
 }
 
@@ -89,9 +153,16 @@ bool ColliderTilemap::IsSideColliding(const Beta::BoundingRectangle& rectangle, 
 //   False if the point is outside the map or the map is empty at that position, 
 //   or true if there is a tile at that position.
 bool ColliderTilemap::IsCollidingAtPosition(float x, float y) const {
-    UNREFERENCED_PARAMETER(x);
-    UNREFERENCED_PARAMETER(y);
-    return false;
+    Beta::Vector2D pos(x, y);
+
+    pos = transform()->GetInverseMatrix() * pos;
+
+    pos = Beta::Vector2D(pos.x + 0.5f, -pos.y + 0.5f);
+
+    int newX = (int)pos.x;
+    int newY = (int)pos.y;
+
+    return m_map->GetCellValue(newX, newY) > 0;
 }
 
 // Moves an object and sets its velocity based on where it collided with the tilemap.
@@ -122,8 +193,16 @@ float ColliderTilemap::GetNextTileCenter(RectangleSide side, float sidePosition)
 }
 
 // Get the colliders aabb
-Beta::BoundingRectangle ColliderTilemap::GetAABB() {
-    Beta::BoundingRectangle rect;
+Beta::BoundingRectangle ColliderTilemap::GetAABB() const {
+    
+    Beta::Vector2D extents = Beta::Vector2D((m_map->GetWidth()  / 2) * transform()->GetScale().x,
+                                            (m_map->GetHeight() / 2) * transform()->GetScale().y);
+
+    Beta::Vector2D center = transform()->GetTranslation() + 
+        Beta::Vector2D(extents.x - transform()->GetScale().x/2, -extents.y + transform()->GetScale().y / 2);
+
+    Beta::BoundingRectangle rect(center, extents);
+
     return rect;
 }
 

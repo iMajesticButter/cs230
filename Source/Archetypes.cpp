@@ -31,7 +31,7 @@
 #include "PointCollider.h"
 #include "Tilemap.h"
 #include "SpriteTilemap.h"
-//#include "ColliderTilemap.h"
+#include "ColliderTilemap.h"
 
 namespace Archetypes {
     //------------------------------------------------------------------------------
@@ -86,6 +86,7 @@ namespace Archetypes {
         monkey->AddComponent<Animator>()->AddAnimation(animation);
         monkey->AddComponent<RigidBody>();
         monkey->AddComponent<MonkeyMovement>();
+        monkey->AddComponent<BoxCollider>();
 
         return monkey;
     }
@@ -165,7 +166,8 @@ namespace Archetypes {
         //tmap->transform()->SetScale(Beta::Vector2D(0.25f, 0.25f));
 
         tmap->AddComponent<SpriteTilemap>(mesh, spriteSource, map);
-        //tmap->AddComponent<ColliderTilemap>(map);
+        tmap->AddComponent<ColliderTilemap>();
+        tmap->GetComponent<ColliderTilemap>()->SetTilemap(map);
 
         return tmap;
 

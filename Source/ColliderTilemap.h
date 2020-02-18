@@ -71,7 +71,7 @@ public:
     void SetTilemap(const Tilemap* map);
 
     // Get the colliders aabb
-    Beta::BoundingRectangle GetAABB() override;
+    Beta::BoundingRectangle GetAABB() const override;
 
 private:
     //------------------------------------------------------------------------------

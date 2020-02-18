@@ -49,15 +49,16 @@ Transform::Transform(Beta::Vector2D translation, Beta::Vector2D scale, float rot
 // Returns:
 //	 A reference to the component's matrix structure
 const CS230::Matrix2D& Transform::GetMatrix() const {
-    using namespace CS230;
-    if (isDirty) {
-        m_matrix = Matrix2D::TranslationMatrix(m_translation.x, m_translation.y) * 
-                   Matrix2D::RotationMatrixRadians(m_rotation) *
-                   Matrix2D::ScalingMatrix(m_scale.x, m_scale.y);
-        isDirty = false;
-        //TODO: send some sort of event to tell all the objects components that the transform matrix has changed
-    }
+    CalculateMatrices();
     return m_matrix;
+}
+
+// Get the inverse transform matrix, based upon translation, rotation and scale settings.
+// Returns:
+//   A reference to the component's inverse matrix structure
+const CS230::Matrix2D& Transform::GetInverseMatrix() const {
+    CalculateMatrices();
+    return m_inverseMatrix;
 }
 
 // Set the translation of a transform component.
@@ -131,6 +132,23 @@ const Beta::Vector2D& Transform::Left() const {
 //------------------------------------------------------------------------------
 // Private Funcs:
 //------------------------------------------------------------------------------
+
+// Calculate the matrix and inverse matrix.
+void Transform::CalculateMatrices() const {
+    using namespace CS230;
+    if (isDirty) {
+        m_matrix = Matrix2D::TranslationMatrix(m_translation.x, m_translation.y) *
+                   Matrix2D::RotationMatrixRadians(m_rotation) *
+                   Matrix2D::ScalingMatrix(m_scale.x, m_scale.y);
+
+        m_inverseMatrix = Matrix2D::ScalingMatrix(1 / m_scale.x, 1 / m_scale.y) * 
+                          Matrix2D::RotationMatrixRadians(-m_rotation) *
+                          Matrix2D::TranslationMatrix(-m_translation.x, -m_translation.y);
+
+        isDirty = false;
+        //TODO: send some sort of event to tell all the objects components that the transform matrix has changed
+    }
+}
 
 // Calculate the forward and left vectors
 void Transform::CalculateDirectionVectors() {

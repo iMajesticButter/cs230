@@ -91,7 +91,7 @@ Beta::Vector2D PointCollider::GetOffset() const {
 }
 
 // Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
-Beta::BoundingRectangle PointCollider::GetAABB() {
+Beta::BoundingRectangle PointCollider::GetAABB() const {
     return Beta::BoundingRectangle(transform()->GetTranslation() + GetOffset(), Beta::Vector2D(0, 0));
 }
 

@@ -16,16 +16,26 @@
 #include "RigidBody.h"
 #include "Animator.h"
 #include "Sprite.h"
+#include "ColliderTilemap.h"
 
 
 //------------------------------------------------------------------------------
 // Public Functions:
 //------------------------------------------------------------------------------
 
+// collision handler
+void MonkeyCollisionHandler(GameObject& object, GameObject& other, Beta::Vector2D intersectVector) {
+    if (other.GetComponent<ColliderTilemap>() != nullptr) {
+        if (intersectVector.y < 0) {
+            object.GetComponent<MonkeyMovement>()->m_onGround = true;
+        }
+    }
+}
+
 // Constructor
 MonkeyMovement::MonkeyMovement() : Component("MonkeyMovement"), 
             m_monkeyWalkSpeed(2.0f), m_monkeyJumpSpeed(200.0f), m_groundHeight(-2.0f), 
-            m_gravity(Beta::Vector2D(0, -9.81f)), m_rigidBody(nullptr) {
+            m_gravity(Beta::Vector2D(0, -9.81f)), m_rigidBody(nullptr), m_sprite(nullptr), m_animator(nullptr), m_onGround(false) {
 
 }
 
@@ -34,6 +44,7 @@ void MonkeyMovement::Initialize() {
     m_rigidBody = GetComponent<RigidBody>();
     m_animator = GetComponent<Animator>();
     m_sprite = GetComponent<Sprite>();
+    GetComponent<Collider>()->SetCollisionHandler(MonkeyCollisionHandler);
 }
 
 // Update function for this component.
@@ -84,16 +95,14 @@ void MonkeyMovement::MoveVertical() const {
 
     m_rigidBody->AddForce(m_gravity);
 
-    //auto input = EngineGetModule(Beta::Input);
+    auto input = EngineGetModule(Beta::Input);
 
-    /*if (transform()->GetTranslation().y <= m_groundHeight) {
-        transform()->SetTranslation(Beta::Vector2D(transform()->GetTranslation().x, m_groundHeight));
-        m_rigidBody->SetVelocity(Beta::Vector2D(m_rigidBody->GetVelocity().x, 0.0f));
-
+    if (m_onGround) {
+        m_onGround = false;
         if (input->CheckHeld(' ')) {
             m_rigidBody->AddForce(Beta::Vector2D(0, m_monkeyJumpSpeed));
         }
-    }*/
+    }
 }
 
 COMPONENT_CLASS_DEFINITIONS(MonkeyMovement)

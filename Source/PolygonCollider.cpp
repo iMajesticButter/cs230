@@ -178,7 +178,7 @@ void PolygonCollider::TransformVerts() const {
 }
 
 // Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
-Beta::BoundingRectangle PolygonCollider::GetAABB() {
+Beta::BoundingRectangle PolygonCollider::GetAABB() const {
     return m_aabb;
 }
 

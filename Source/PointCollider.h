@@ -34,7 +34,7 @@ public:
     Beta::Vector2D GetOffset() const;
 
     // Get an axis-aligned-bounding-box for this collider (used for tilemap collisions)
-    virtual Beta::BoundingRectangle GetAABB();
+    virtual Beta::BoundingRectangle GetAABB() const;
 
 private:
 

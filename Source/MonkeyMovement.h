@@ -50,6 +50,9 @@ public:
     //   dt = The (fixed) change in time since the last step.
     void Update(float dt) override;
 
+    // collision handler
+    friend void MonkeyCollisionHandler(GameObject& object, GameObject& other, Beta::Vector2D intersectVector);
+
 private:
     //------------------------------------------------------------------------------
     // Private Functions:
@@ -70,11 +73,14 @@ private:
     float m_monkeyJumpSpeed;
     float m_groundHeight;
     Beta::Vector2D m_gravity;
+    mutable bool m_onGround;
 
     // Components
     RigidBody* m_rigidBody;
     Animator* m_animator;
     Sprite* m_sprite;
+
+    
 
     COMPONENT_CLASS_DECLARATIONS(MonkeyMovement)
 };
