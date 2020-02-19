@@ -78,8 +78,14 @@ void MonkeyMovement::MoveHorizontal() const {
 
     if (horizMove == 0) {
         m_animator->Play(0, 1, false);
+        m_sprite->SetFrame(12);
     } else if(m_animator->IsDone()) {
         m_animator->Play(0, 1, true);
+    }
+
+    if (!m_onGround) {
+        m_animator->Play(0, 1, false);
+        m_sprite->SetFrame(9);
     }
 
     if (horizMove > 0) {

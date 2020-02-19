@@ -142,6 +142,16 @@ bool ColliderTilemap::IsSideColliding(const Beta::BoundingRectangle& rectangle, 
             break;
     }
 
+#ifdef _DEBUG
+    //debug draw the hotspots
+
+    auto debug = EngineGetModule(Beta::DebugDraw);
+
+    debug->AddCircle(spot1, 0.025f, Beta::Colors::Red);
+    debug->AddCircle(spot2, 0.025f, Beta::Colors::Red);
+
+#endif
+
     if (IsCollidingAtPosition(spot1.x, spot1.y) || IsCollidingAtPosition(spot2.x, spot2.y)) {
         return true;
     }

@@ -64,14 +64,14 @@ int Tilemap::GetCellValue(unsigned column, unsigned row) const {
     return m_data[row][column];
 }
 
-std::string Tilemap::m_mapPath = "Assets/Levels/";
+std::string Tilemap::m_mapPath = "/Levels/";
 
 // Create a tilemap from the given file.
 // Params:
 //   filename = The name of the file containing the tilemap data.
 Tilemap* Tilemap::CreateTilemapFromFile(const std::string& filename) {
     std::stringstream sstream;
-    sstream << m_mapPath << filename;
+    sstream << Beta::EngineCore::GetInstance().GetFilePath() << m_mapPath << filename;
     std::string path = sstream.str();
     std::ifstream file(path);
 
