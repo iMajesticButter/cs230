@@ -118,22 +118,25 @@ bool ColliderTilemap::IsSideColliding(const Beta::BoundingRectangle& rectangle, 
     Beta::Vector2D spot1;
     Beta::Vector2D spot2;
 
+    //how far along the edges are the hotspots
+    const float hotspotPosition = 0.75f;
+
     switch (side) {
         case RectangleSide::SideBottom:
-            spot1 = Beta::Vector2D(rectangle.center.x + rectangle.extents.x * 0.9f, rectangle.bottom);
-            spot2 = Beta::Vector2D(rectangle.center.x - rectangle.extents.x * 0.9f, rectangle.bottom);
+            spot1 = Beta::Vector2D(rectangle.center.x + rectangle.extents.x * hotspotPosition, rectangle.bottom);
+            spot2 = Beta::Vector2D(rectangle.center.x - rectangle.extents.x * hotspotPosition, rectangle.bottom);
             break;
         case RectangleSide::SideTop:
-            spot1 = Beta::Vector2D(rectangle.center.x + rectangle.extents.x * 0.9f, rectangle.top);
-            spot2 = Beta::Vector2D(rectangle.center.x - rectangle.extents.x * 0.9f, rectangle.top);
+            spot1 = Beta::Vector2D(rectangle.center.x + rectangle.extents.x * hotspotPosition, rectangle.top);
+            spot2 = Beta::Vector2D(rectangle.center.x - rectangle.extents.x * hotspotPosition, rectangle.top);
             break;
         case RectangleSide::SideLeft:
-            spot1 = Beta::Vector2D(rectangle.left, rectangle.center.y + rectangle.extents.y * 0.9f);
-            spot2 = Beta::Vector2D(rectangle.left, rectangle.center.y - rectangle.extents.y * 0.9f);
+            spot1 = Beta::Vector2D(rectangle.left, rectangle.center.y + rectangle.extents.y * hotspotPosition);
+            spot2 = Beta::Vector2D(rectangle.left, rectangle.center.y - rectangle.extents.y * hotspotPosition);
             break;
         case RectangleSide::SideRight:
-            spot1 = Beta::Vector2D(rectangle.right, rectangle.center.y + rectangle.extents.y * 0.9f);
-            spot2 = Beta::Vector2D(rectangle.right, rectangle.center.y - rectangle.extents.y * 0.9f);
+            spot1 = Beta::Vector2D(rectangle.right, rectangle.center.y + rectangle.extents.y * hotspotPosition);
+            spot2 = Beta::Vector2D(rectangle.right, rectangle.center.y - rectangle.extents.y * hotspotPosition);
             break;
         default:
             break;
