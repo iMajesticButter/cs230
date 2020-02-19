@@ -118,4 +118,11 @@ const Beta::Vector2D& RigidBody::GetOldTranslation() const {
     return m_oldTranslation;
 }
 
+// Apply an impulse to the rigid body
+// Params:
+//  impulse = the impulse to apply
+void RigidBody::ApplyImpulse(Beta::Vector2D impulse) {
+    m_velocity += impulse;
+}
+
 COMPONENT_CLASS_DEFINITIONS(RigidBody)

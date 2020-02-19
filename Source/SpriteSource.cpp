@@ -45,8 +45,11 @@ void SpriteSource::UseTexture(unsigned frameIndex, bool flipX, bool flipY, const
     //calculate uv offset
     Beta::Vector2D UVoffset = GetUV(frameIndex);
 
+    if(frameIndex == 6)
+        std::cout << UVoffset << std::endl;
+
     //call textures use function
-    m_texture->Use(1, 1, flipX, flipY, UVoffset, shader);
+    m_texture->Use(m_numCols, m_numRows, flipX, flipY, UVoffset, shader);
 
 }
 

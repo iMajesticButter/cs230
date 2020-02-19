@@ -229,7 +229,7 @@ void GameObjectManager::CheckCollisions() {
                 continue;
             }
 
-            std::cout << "check" << std::endl;
+            //std::cout << "check" << std::endl;
 
             // Resolve the collision
             if (obj1Col->GetTriggerOnly() || obj2Col->GetTriggerOnly()) {

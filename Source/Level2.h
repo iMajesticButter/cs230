@@ -68,7 +68,6 @@ namespace Levels {
         Beta::Mesh* m_mesh;
         Beta::Texture* m_tex;
 
-        Beta::Mesh* m_mapMesh;
         Beta::Texture* m_mapTex;
         SpriteSource* m_mapSpriteSource;
 

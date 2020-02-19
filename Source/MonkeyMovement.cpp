@@ -34,7 +34,7 @@ void MonkeyCollisionHandler(GameObject& object, GameObject& other, Beta::Vector2
 
 // Constructor
 MonkeyMovement::MonkeyMovement() : Component("MonkeyMovement"), 
-            m_monkeyWalkSpeed(2.0f), m_monkeyJumpSpeed(200.0f), m_groundHeight(-2.0f), 
+            m_monkeyWalkSpeed(2.0f), m_monkeyJumpSpeed(7.0f), m_groundHeight(-2.0f), 
             m_gravity(Beta::Vector2D(0, -9.81f)), m_rigidBody(nullptr), m_sprite(nullptr), m_animator(nullptr), m_onGround(false) {
 
 }
@@ -100,7 +100,7 @@ void MonkeyMovement::MoveVertical() const {
     if (m_onGround) {
         m_onGround = false;
         if (input->CheckHeld(' ')) {
-            m_rigidBody->AddForce(Beta::Vector2D(0, m_monkeyJumpSpeed));
+            m_rigidBody->ApplyImpulse(Beta::Vector2D(0, m_monkeyJumpSpeed));
         }
     }
 }

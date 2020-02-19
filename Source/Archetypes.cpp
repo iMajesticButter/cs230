@@ -86,7 +86,7 @@ namespace Archetypes {
         monkey->AddComponent<Animator>()->AddAnimation(animation);
         monkey->AddComponent<RigidBody>();
         monkey->AddComponent<MonkeyMovement>();
-        monkey->AddComponent<BoxCollider>();
+        monkey->AddComponent<BoxCollider>(0.75f, 1.0f);
 
         return monkey;
     }

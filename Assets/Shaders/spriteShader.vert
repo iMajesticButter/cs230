@@ -16,7 +16,7 @@ layout (location = 2) in vec2 textureCoordinateAttribute;
 out vec4 vertexColor;
 out vec2 textureCoordinate;
 
-void main()										
+void main()
 {
 	// Interpolate vertex colors
 	vertexColor = vertexColorAttribute;

@@ -35,7 +35,7 @@ namespace Levels {
 
 	// Creates an instance of Level 2.
 	Level2::Level2() : Level("Level2"), 
-        m_animation(nullptr), m_mesh(nullptr), m_mapMesh(nullptr), m_spriteSource(nullptr), m_mapSpriteSource(nullptr), m_tex(nullptr), m_mapTex(nullptr), m_tilemap(nullptr) {
+        m_animation(nullptr), m_mesh(nullptr), m_spriteSource(nullptr), m_mapSpriteSource(nullptr), m_tex(nullptr), m_mapTex(nullptr), m_tilemap(nullptr) {
        
 	}
 
@@ -43,7 +43,7 @@ namespace Levels {
 	void Level2::Load() {
 		std::cout << "Level2::Load" << std::endl;
 
-        m_mesh = Beta::MeshHelper::CreateQuadMesh(Beta::Vector2D(1.0f/3.0f, 1.0f/5.0f));
+        m_mesh = Beta::MeshHelper::CreateQuadMesh(Beta::Vector2D(1.0f, 1.0f));
 
         m_tex = Beta::Texture::CreateTextureFromFile("Monkey.png");
         m_spriteSource = new SpriteSource(m_tex, "Monkey", 3, 5);
@@ -51,8 +51,6 @@ namespace Levels {
         m_animation = new Animation("test", m_spriteSource, 8, 0, 0.08f);
 
         m_tilemap = Tilemap::CreateTilemapFromFile("Level2.txt");
-
-        m_mapMesh = Beta::MeshHelper::CreateQuadMesh(Beta::Vector2D(1.0f/4.0f, 1.0f/3.0f));
 
         m_mapTex = Beta::Texture::CreateTextureFromFile("Tilemap.png");
         m_mapSpriteSource = new SpriteSource(m_mapTex, "tilemap", 4, 3);
@@ -65,7 +63,7 @@ namespace Levels {
 
         GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateMonkey(m_mesh, m_spriteSource, m_animation));
 
-        GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateTilemapObject(m_mapMesh, m_mapSpriteSource, m_tilemap));
+        GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateTilemapObject(m_mesh, m_mapSpriteSource, m_tilemap));
 
     }
 
@@ -95,7 +93,6 @@ namespace Levels {
 
         delete m_mapSpriteSource;
         delete m_mapTex;
-        delete m_mapMesh;
 
         delete m_tilemap;
 

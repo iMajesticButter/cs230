@@ -99,6 +99,11 @@ public:
     //   A reference to the component's oldTranslation structure,
     const Beta::Vector2D& GetOldTranslation() const;
 
+    // Apply an impulse to the rigid body
+    // Params:
+    //  impulse = the impulse to apply
+    void ApplyImpulse(Beta::Vector2D impulse);
+
 private:
     //------------------------------------------------------------------------------
     // Private Variables:
