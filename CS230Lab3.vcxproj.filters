@@ -124,6 +124,9 @@
     <ClCompile Include="Source\ColliderTilemap.cpp">
       <Filter>High-Level API</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SoundManager.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -232,6 +235,9 @@
       <Filter>High-Level API</Filter>
     </ClInclude>
     <ClInclude Include="Source\Tilemap.h">
+      <Filter>High-Level API</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SoundManager.h">
       <Filter>High-Level API</Filter>
     </ClInclude>
   </ItemGroup>

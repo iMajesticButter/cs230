@@ -3,9 +3,9 @@
 // File Name:	SoundManager.h
 // Author(s):	Jeremy Kings (j.kings)
 // Project:		Project 7
-// Course:		WANIC VGP2 2018-2019
+// Course:		WANIC VGP2 2019-2020
 //
-// Copyright © 2018 DigiPen (USA) Corporation.
+// Copyright © 2020 DigiPen (USA) Corporation.
 //
 //------------------------------------------------------------------------------
 
@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include "BetaObject.h"
+#include "betaVector.h"
 #include <fmod_studio.hpp>
 
 //------------------------------------------------------------------------------
@@ -120,14 +121,16 @@ private:
 	//------------------------------------------------------------------------------
 
 	// Individual sound files
-	static const unsigned maxNumSounds = 30;
-	size_t numSounds;
-	FMOD::Sound* soundList[maxNumSounds];
+	//static const unsigned maxNumSounds = 30;
+	//size_t numSounds;
+	//FMOD::Sound* soundList[maxNumSounds];
+    Beta::Data::Vector<FMOD::Sound*> soundList;
 
 	// Sound banks
-	static const unsigned maxNumBanks = 10;
-	size_t numBanks;
-	FMOD::Studio::Bank* bankList[maxNumBanks];  // List of all loaded sound banks.
+	//static const unsigned maxNumBanks = 10;
+	//size_t numBanks;
+	//FMOD::Studio::Bank* bankList[maxNumBanks];  // List of all loaded sound banks.
+    Beta::Data::Vector<FMOD::Studio::Bank*> bankList;
 
 	// Channels
 	FMOD::Channel* musicChannel;				// The channel most recently used to play music
