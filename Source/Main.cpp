@@ -16,6 +16,7 @@
 #include "stdafx.h"
 
 #include "Space.h"
+#include "SoundManager.h"
 #include "Level1.h"
 
 //------------------------------------------------------------------------------
@@ -25,34 +26,34 @@
 //------------------------------------------------------------------------------
 
 // Main function
-int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In_ LPSTR command_line, _In_ int show)
-{
-	// Enable memory leak checking
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
+int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In_ LPSTR command_line, _In_ int show) {
+    // Enable memory leak checking
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 
-	// Unused parameters
-	UNREFERENCED_PARAMETER(prevInstance);
-	UNREFERENCED_PARAMETER(command_line);
-	UNREFERENCED_PARAMETER(show);
-	UNREFERENCED_PARAMETER(instance);
+    // Unused parameters
+    UNREFERENCED_PARAMETER(prevInstance);
+    UNREFERENCED_PARAMETER(command_line);
+    UNREFERENCED_PARAMETER(show);
+    UNREFERENCED_PARAMETER(instance);
 
-	using namespace Beta;
-	EngineCore& engine = EngineCore::GetInstance();
+    using namespace Beta;
+    EngineCore& engine = EngineCore::GetInstance();
 
-	// Add additional modules to engine (Space)
-	Space& space = *engine.AddModule<Space>();
+    // Add additional modules to engine (Space)
+    Space& space = *engine.AddModule<Space>();
+    engine.AddModule<SoundManager>();
 
-	// Set initial level of space to the first level
-	space.SetLevel<Levels::Level1>();
+    // Set initial level of space to the first level
+    space.SetLevel<Levels::Level1>();
 
-	// Game engine goes!
-	StartupSettings settings;
-	settings.windowWidth = 1000;
-	settings.windowHeight = 700;
-	settings.framerateCap = 200;
+    // Game engine goes!
+    StartupSettings settings;
+    settings.windowWidth = 1000;
+    settings.windowHeight = 700;
+    settings.framerateCap = 200;
 
-	engine.Start(settings);
+    engine.Start(settings);
 
-	return 0;
+    return 0;
 }

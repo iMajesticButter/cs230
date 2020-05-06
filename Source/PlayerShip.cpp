@@ -16,6 +16,7 @@
 #include "Space.h"
 #include "GameObjectManager.h"
 #include "RigidBody.h"
+#include "SoundManager.h"
 
 
 // Non-default constructor
@@ -34,6 +35,15 @@ PlayerShip::PlayerShip(float forwardThrust, float maximumSpeed,
 // Initialize this component (happens at object creation).
 void PlayerShip::Initialize() {
     m_rigidBody = GetComponent<RigidBody>();
+
+    SoundManager& soundManager = *EngineGetModule(SoundManager);
+
+    m_testTones = soundManager.PlayEvent("Test Tones");
+
+    m_testTones->setPaused(true);
+    m_testTones->setVolume(0.2f);
+    m_testTones->setParameterValue("Wave Type", 0);
+    m_testTones->setParameterValue("LowMidHigh", 0);
 }
 
 // Update function for this component.
@@ -57,6 +67,9 @@ void PlayerShip::Move() const {
 
     if (input->CheckHeld('W')) {
         m_rigidBody->AddForce(transform()->Forward() * m_forwardThrust);
+        m_testTones->setPaused(false);
+    } else {
+        m_testTones->setPaused(true);
     }
 
 }

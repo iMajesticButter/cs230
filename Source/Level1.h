@@ -24,6 +24,11 @@ namespace Beta {
 class Sprite;
 class Transform;
 class RigidBody;
+class SoundManager;
+
+namespace FMOD {
+    class Channel;
+}
 
 
 //------------------------------------------------------------------------------
@@ -53,6 +58,9 @@ namespace Levels {
 		//	 dt = Change in time (in seconds) since the last game loop.
 		void Update(float dt);
 
+        //shutdown the level
+        void Shutdown();
+
 		// Unload the resources associated with Level 1.
 		void Unload();
 
@@ -63,6 +71,9 @@ namespace Levels {
 		//------------------------------------------------------------------------------
 
         Beta::Mesh* m_mesh;
+
+        SoundManager* m_soundManager;
+        FMOD::Channel* m_music;
 
 	};
 }

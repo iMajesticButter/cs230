@@ -26,6 +26,12 @@
 class Transform;
 class RigidBody;
 
+namespace FMOD {
+    namespace Studio {
+        class EventInstance;
+    }
+}
+
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
@@ -79,6 +85,8 @@ private:
 
     // Components
     RigidBody* m_rigidBody;
+
+    FMOD::Studio::EventInstance* m_testTones;
 
     COMPONENT_CLASS_DECLARATIONS(PlayerShip)
 };

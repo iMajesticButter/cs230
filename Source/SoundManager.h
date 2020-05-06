@@ -29,6 +29,15 @@
 #undef PlaySound
 #endif // ifdef for PlaySound
 
+
+//------------------------------------------------------------------------------
+// Functions
+//------------------------------------------------------------------------------
+
+//print an error message if an FMOD function retuns one
+bool FMOD_Assert(FMOD_RESULT result, const bool throwExeptionIfFail = false);
+
+
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
@@ -103,6 +112,9 @@ public:
 	// Return:
 	//	 volume = Current value for the FX volume.
 	float GetEffectsVolume() const;
+
+    // Stop the current music
+    void StopMusic();
 
 private:
 	//------------------------------------------------------------------------------

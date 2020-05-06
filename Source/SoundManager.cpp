@@ -24,20 +24,22 @@
 
 //------------------------------------------------------------------------------
 
+const unsigned strBufSize = 128;
+
 
 //------------------------------------------------------------------------------
 // Local Functions:
 //------------------------------------------------------------------------------
-bool FMOD_Assert(FMOD_RESULT result, const bool throwExeptionIfFail = false) {
+bool FMOD_Assert(FMOD_RESULT result, const bool throwExeptionIfFail) {
     if (result != FMOD_OK) {
         std::cerr << "FMOD ERROR! (" << result << "): " << FMOD_ErrorString(result) << std::endl;
-
+        
         if (throwExeptionIfFail) {
             std::stringstream sstream;
             sstream << "FAILED TO INITIALIZE FMOD (" << result << "): " << FMOD_ErrorString(result);
             throw sstream.str();
         }
-
+        
         return false;
     }
     return true;
@@ -72,6 +74,8 @@ SoundManager::~SoundManager() {
 // Params:
 //	 dt = Change in time (in seconds) since the last game loop.
 void SoundManager::Update(float dt) {
+    UNREFERENCED_PARAMETER(dt);
+
     FMOD_Assert(studioSystem->update());
 }
 
@@ -80,9 +84,11 @@ void SoundManager::Shutdown(void) {
     for (size_t i = 0; i < soundList.Size(); ++i) {
         FMOD_Assert(soundList[i]->release());
     }
+    soundList.Clear();
     for (size_t i = 0; i < bankList.Size(); ++i) {
         FMOD_Assert(bankList[i]->unload());
     }
+    bankList.Clear();
 }
 
 // Creates a non-looping FMOD sound.
@@ -129,16 +135,14 @@ void SoundManager::AddBank(const std::string& filename) {
 //	 name = The name of the sound to be played.
 // Return:
 //   The channel that was used to play the given sound.
-FMOD::Channel* SoundManager::PlaySound(const std::string& name) {
-
-    const unsigned strBufSize = 128;
+FMOD::Channel* SoundManager::PlaySound(const std::string& soundName) {
 
     char strBuf[strBufSize];
     FMOD_MODE mode;
 
     for (size_t i = 0; i < soundList.Size(); ++i) {
         FMOD_Assert(soundList[i]->getName(strBuf, strBufSize));
-        if (strcmp(strBuf, name.c_str()) != 0)
+        if (strcmp(strBuf, soundName.c_str()) != 0)
             continue;
         
         FMOD_Assert(soundList[i]->getMode(&mode));
@@ -155,10 +159,10 @@ FMOD::Channel* SoundManager::PlaySound(const std::string& name) {
 // The event must be in one of the loaded banks.
 // Params:
 //	 name = The name of the event that will be started.
-FMOD::Studio::EventInstance* SoundManager::PlayEvent(const std::string& name) {
+FMOD::Studio::EventInstance* SoundManager::PlayEvent(const std::string& soundName) {
 
     std::stringstream eventName;
-    eventName << eventPrefix << name;
+    eventName << eventPrefix << soundName;
 
     FMOD::Studio::EventDescription* description;
     FMOD::Studio::EventInstance* instance;
@@ -206,6 +210,14 @@ float SoundManager::GetEffectsVolume() const {
     return effectsVolume;
 }
 
+// Stop the current music
+void SoundManager::StopMusic() {
+    if (musicChannel != nullptr) {
+        FMOD_Assert(musicChannel->stop());
+        musicChannel = nullptr;
+    }
+}
+
 //------------------------------------------------------------------------------
 // Private Functions:
 //------------------------------------------------------------------------------
@@ -214,15 +226,36 @@ float SoundManager::GetEffectsVolume() const {
 
 // Different behaviors for SFX vs BGM
 FMOD::Channel* SoundManager::PlayEffect(FMOD::Sound* sound) const {
+    FMOD::Channel* channel;
 
+    FMOD_Assert(system->playSound(sound, effectsChannelGroup, false, &channel));
+
+    return channel;
 }
 FMOD::Channel* SoundManager::PlayMusic(FMOD::Sound* sound) {
+    StopMusic();
 
+    FMOD_Assert(system->playSound(sound, nullptr, false, &musicChannel));
+
+    return musicChannel;
 }
 
 // Add FX/BGM helper
 void SoundManager::AddSound(const std::string& filename, FMOD_MODE mode) {
+    std::stringstream path;
+    path << "Assets/" << audioFilePath << filename;
 
+    FMOD::Sound* sound;
+
+    char strBuf[strBufSize];
+
+    FMOD_Assert(system->createSound(path.str().c_str(), mode, nullptr, &sound));
+
+    FMOD_Assert(sound->getName(strBuf, strBufSize));
+
+    std::cout << "Loaded Sound: " << strBuf << " from: " << path.str() << std::endl;
+
+    soundList.push_back(sound);
 }
 
 

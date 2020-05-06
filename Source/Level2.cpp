@@ -77,11 +77,11 @@ namespace Levels {
         //level switching
         Beta::Input* in = EngineGetModule(Beta::Input);
 
-        if (in->IsKeyDown('1')) {
+        if (in->CheckTriggered('1')) {
             GetSpace()->SetLevel<Level1>();
-        } else if (in->IsKeyDown('2')) {
+        } else if (in->CheckTriggered('2')) {
             GetSpace()->RestartLevel();
-        } else if (in->IsKeyDown('3')) {
+        } else if (in->CheckTriggered('3')) {
             GetSpace()->SetLevel<Level3>();
         }
 
