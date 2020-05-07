@@ -10,9 +10,6 @@
     <Filter Include="Game\Levels">
       <UniqueIdentifier>{eb42e325-6dc2-4ec9-a38c-fed4827f3174}</UniqueIdentifier>
     </Filter>
-    <Filter Include="High-Level API">
-      <UniqueIdentifier>{72e40003-8b1c-46e8-9f71-ff5f6d46b94f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Behaviors">
       <UniqueIdentifier>{30b4313e-2f34-40ba-9613-d250bab122eb}</UniqueIdentifier>
     </Filter>
@@ -25,71 +22,11 @@
     <ClCompile Include="Source\stdafx.cpp">
       <Filter>Precompiled</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Level.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Space.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Level1.cpp">
       <Filter>Game\Levels</Filter>
     </ClCompile>
     <ClCompile Include="Source\Level2.cpp">
       <Filter>Game\Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Sprite.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MeshHelper.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SpriteSource.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Animator.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Animation.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Matrix2DStudent.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Transform.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\RigidBody.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Behaviors.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Component.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameObject.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameObjectManager.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Archetypes.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Collider.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Intersection2D.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Polygon.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PolygonCollider.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\BoxCollider.cpp">
-      <Filter>High-Level API</Filter>
     </ClCompile>
     <ClCompile Include="Source\Level3.cpp">
       <Filter>Game\Levels</Filter>
@@ -109,23 +46,8 @@
     <ClCompile Include="Source\ColorChange.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CircleCollider.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PointCollider.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Tilemap.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SpriteTilemap.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ColliderTilemap.cpp">
-      <Filter>High-Level API</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SoundManager.cpp">
-      <Filter>High-Level API</Filter>
+    <ClCompile Include="Source\Archetypes.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,74 +57,11 @@
     <ClInclude Include="Source\Level1.h">
       <Filter>Game\Levels</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Level.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Space.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Level2.h">
       <Filter>Game\Levels</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Sprite.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MeshHelper.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SpriteSource.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Animator.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Animation.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Matrix2DStudent.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RigidBody.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Transform.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Behaviors.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Component.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObject.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObjectManager.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
     <ClInclude Include="Source\betaVector.h">
       <Filter>utilitystuff</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Archetypes.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ComponentGameObjectTemplateFunctions.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Collider.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Intersection2D.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Polygon.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PolygonCollider.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BoxCollider.h">
-      <Filter>High-Level API</Filter>
     </ClInclude>
     <ClInclude Include="Source\Level3.h">
       <Filter>Game\Levels</Filter>
@@ -222,23 +81,8 @@
     <ClInclude Include="Source\ColorChange.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CircleCollider.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PointCollider.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ColliderTilemap.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SpriteTilemap.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Tilemap.h">
-      <Filter>High-Level API</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SoundManager.h">
-      <Filter>High-Level API</Filter>
+    <ClInclude Include="Source\Archetypes.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

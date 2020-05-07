@@ -11,84 +11,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Animation.cpp" />
-    <ClCompile Include="Source\Animator.cpp" />
     <ClCompile Include="Source\Archetypes.cpp" />
-    <ClCompile Include="Source\Behaviors.cpp" />
-    <ClCompile Include="Source\BoxCollider.cpp" />
-    <ClCompile Include="Source\CircleCollider.cpp" />
-    <ClCompile Include="Source\Collider.cpp" />
-    <ClCompile Include="Source\ColliderTilemap.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
-    <ClCompile Include="Source\Component.cpp" />
-    <ClCompile Include="Source\GameObject.cpp" />
-    <ClCompile Include="Source\GameObjectManager.cpp" />
-    <ClCompile Include="Source\Intersection2D.cpp" />
-    <ClCompile Include="Source\Level.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
     <ClCompile Include="Source\Level2.cpp" />
     <ClCompile Include="Source\Level3.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Matrix2DStudent.cpp" />
-    <ClCompile Include="Source\MeshHelper.cpp" />
     <ClCompile Include="Source\MonkeyMovement.cpp" />
     <ClCompile Include="Source\PlayerShip.cpp" />
-    <ClCompile Include="Source\PointCollider.cpp" />
-    <ClCompile Include="Source\Polygon.cpp" />
-    <ClCompile Include="Source\PolygonCollider.cpp" />
-    <ClCompile Include="Source\RigidBody.cpp" />
     <ClCompile Include="Source\ScreenWrap.cpp" />
-    <ClCompile Include="Source\SoundManager.cpp" />
-    <ClCompile Include="Source\Space.cpp" />
-    <ClCompile Include="Source\Sprite.cpp" />
-    <ClCompile Include="Source\SpriteSource.cpp" />
-    <ClCompile Include="Source\SpriteTilemap.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Source\Tilemap.cpp" />
     <ClCompile Include="Source\TimedDeath.cpp" />
-    <ClCompile Include="Source\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Animation.h" />
-    <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\Archetypes.h" />
-    <ClInclude Include="Source\Behaviors.h" />
     <ClInclude Include="Source\betaVector.h" />
-    <ClInclude Include="Source\BoxCollider.h" />
-    <ClInclude Include="Source\CircleCollider.h" />
-    <ClInclude Include="Source\Collider.h" />
-    <ClInclude Include="Source\ColliderTilemap.h" />
     <ClInclude Include="Source\ColorChange.h" />
-    <ClInclude Include="Source\Component.h" />
-    <ClInclude Include="Source\ComponentGameObjectTemplateFunctions.h" />
-    <ClInclude Include="Source\GameObject.h" />
-    <ClInclude Include="Source\GameObjectManager.h" />
-    <ClInclude Include="Source\Intersection2D.h" />
-    <ClInclude Include="Source\Level.h" />
     <ClInclude Include="Source\Level1.h" />
     <ClInclude Include="Source\Level2.h" />
     <ClInclude Include="Source\Level3.h" />
-    <ClInclude Include="Source\Matrix2DStudent.h" />
-    <ClInclude Include="Source\MeshHelper.h" />
     <ClInclude Include="Source\MonkeyMovement.h" />
     <ClInclude Include="Source\PlayerShip.h" />
-    <ClInclude Include="Source\PointCollider.h" />
-    <ClInclude Include="Source\Polygon.h" />
-    <ClInclude Include="Source\PolygonCollider.h" />
-    <ClInclude Include="Source\RigidBody.h" />
     <ClInclude Include="Source\ScreenWrap.h" />
-    <ClInclude Include="Source\SoundManager.h" />
-    <ClInclude Include="Source\Space.h" />
-    <ClInclude Include="Source\Sprite.h" />
-    <ClInclude Include="Source\SpriteSource.h" />
-    <ClInclude Include="Source\SpriteTilemap.h" />
     <ClInclude Include="Source\stdafx.h" />
-    <ClInclude Include="Source\Tilemap.h" />
     <ClInclude Include="Source\TimedDeath.h" />
-    <ClInclude Include="Source\Transform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -124,15 +73,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)</TargetName>
-    <IncludePath>fmod/inc;LowLevelAPI\include;glfw\include;$(IncludePath)</IncludePath>
-    <LibraryPath>fmod/lib;LowLevelAPI\lib;glfw\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>fmod/inc;LowLevelAPI\include;glfw\include;HighLevelAPI\include;$(IncludePath)</IncludePath>
+    <LibraryPath>fmod/lib;LowLevelAPI\lib;glfw\lib\x64;HighLevelAPI\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>$(ProjectName)</TargetName>
-    <IncludePath>fmod/inc;LowLevelAPI\include;glfw\include;$(IncludePath)</IncludePath>
-    <LibraryPath>fmod/lib;LowLevelAPI\lib;glfw\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>fmod/inc;LowLevelAPI\include;glfw\include;HighLevelAPI\include;$(IncludePath)</IncludePath>
+    <LibraryPath>fmod/lib;LowLevelAPI\lib;glfw\lib\x64;HighLevelAPI\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -151,7 +100,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>BetaLow_x64_D.lib;fmodL64_vc.lib;fmodstudioL64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>BetaLow_x64_D.lib;fmodL64_vc.lib;fmodstudioL64_vc.lib;BetaHigh_x64_D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
@@ -175,11 +124,12 @@ xcopy fmod\lib\fmodstudioL64.dll "$(OutDir)" /Y</Command>
       <AdditionalOptions>
       </AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>BetaLow_x64.lib;fmod64_vc.lib;fmodstudio64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>BetaLow_x64.lib;fmod64_vc.lib;fmodstudio64_vc.lib;BetaHigh_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>

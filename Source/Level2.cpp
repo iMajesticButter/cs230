@@ -24,7 +24,7 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "RigidBody.h"
-#include "Behaviors.h"
+//#include "Behaviors.h"
 #include "Archetypes.h"
 #include "Tilemap.h"
 

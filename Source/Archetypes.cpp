@@ -5,7 +5,7 @@
 // Project:		Project 2 : Object Management
 // Course:		WANIC VGP2 2019-2020
 //
-// Copyright © 2020 DigiPen (USA) Corporation.
+// Copyright Â© 2020 DigiPen (USA) Corporation.
 //
 //------------------------------------------------------------------------------
 

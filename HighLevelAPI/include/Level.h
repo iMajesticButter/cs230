@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	Behaviors.h
-// Author(s):	Brandon Wolenetz
-// Project:		BetaFramework
-// Course:		WANIC VGP2 2019-2020
+// File Name:	Level.h
+// Author(s):	Jeremy Kings (j.kings)
+// Project:		BetaEngine
+// Course:		CS230
 //
 // Copyright © 2019 DigiPen (USA) Corporation.
 //
@@ -15,30 +15,31 @@
 // Include Files:
 //------------------------------------------------------------------------------
 
+#include "BetaObject.h"
+
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
 
-class Transform;
-class RigidBody;
+class Space;
 
 //------------------------------------------------------------------------------
-// Public Functions:
+// Public Structures:
 //------------------------------------------------------------------------------
 
-namespace Behaviors {
+// You are free to change the contents of this structure as long as you do not
+//   change the public interface (functions) declared in the header.
+class Level : public Beta::BetaObject {
+public:
+	// Creates a game state.
+	// Params:
+	//   name = Name to use for this state.
+	Level(const std::string& name);
 
-    // Movement behavior for the triangle/ship.
-    // Params:
-    //	 transform = The transform component of the ship.
-    //   rigidBody = The rigid body of the ship.
-    void UpdateShip(Transform* transform, RigidBody* rigidBody);
+	// Retrieve the space in which the level is running.
+	Space* GetSpace() const;
+};
 
-    // Movement behavior for the monkey.
-    // Params:
-    //	 transform = The transform component of the monkey.
-    //   rigidBody = The rigid body of the monkey.
-    void UpdateMonkey(Transform* transform, RigidBody* rigidBody);
-}
+//------------------------------------------------------------------------------

@@ -23,29 +23,30 @@
     <ProjectGuid>{8040F4F9-43E4-4218-9C2B-EA91C4B33F9A}</ProjectGuid>
     <RootNamespace>HighLevelAPI</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>BetaHigh</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -69,13 +70,37 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)\lib\</OutDir>
+    <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_x86_D</TargetName>
+    <IncludePath>include;..\LowLevelAPI\include;..\fmod\inc;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)\lib\</OutDir>
+    <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_x86</TargetName>
+    <IncludePath>include;..\LowLevelAPI\include;..\fmod\inc;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)\lib\</OutDir>
+    <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_x64_D</TargetName>
+    <IncludePath>include;..\LowLevelAPI\include;..\fmod\inc;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)\lib\</OutDir>
+    <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_x64</TargetName>
+    <IncludePath>include;..\LowLevelAPI\include;..\fmod\inc;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -87,6 +112,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -100,6 +126,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -115,6 +143,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,6 +153,64 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Animation.h" />
+    <ClInclude Include="include\Animator.h" />
+    <ClInclude Include="include\betaVector.h" />
+    <ClInclude Include="include\BoxCollider.h" />
+    <ClInclude Include="include\CircleCollider.h" />
+    <ClInclude Include="include\Collider.h" />
+    <ClInclude Include="include\ColliderTilemap.h" />
+    <ClInclude Include="include\Component.h" />
+    <ClInclude Include="include\ComponentGameObjectTemplateFunctions.h" />
+    <ClInclude Include="include\GameObject.h" />
+    <ClInclude Include="include\GameObjectManager.h" />
+    <ClInclude Include="include\Intersection2D.h" />
+    <ClInclude Include="include\Level.h" />
+    <ClInclude Include="include\Matrix2DStudent.h" />
+    <ClInclude Include="include\MeshHelper.h" />
+    <ClInclude Include="include\PointCollider.h" />
+    <ClInclude Include="include\Polygon.h" />
+    <ClInclude Include="include\PolygonCollider.h" />
+    <ClInclude Include="include\RigidBody.h" />
+    <ClInclude Include="include\SoundManager.h" />
+    <ClInclude Include="include\Space.h" />
+    <ClInclude Include="include\Sprite.h" />
+    <ClInclude Include="include\SpriteSource.h" />
+    <ClInclude Include="include\SpriteTilemap.h" />
+    <ClInclude Include="include\Tilemap.h" />
+    <ClInclude Include="include\Transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\Animator.cpp" />
+    <ClCompile Include="src\BoxCollider.cpp" />
+    <ClCompile Include="src\CircleCollider.cpp" />
+    <ClCompile Include="src\Collider.cpp" />
+    <ClCompile Include="src\ColliderTilemap.cpp" />
+    <ClCompile Include="src\Component.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\GameObjectManager.cpp" />
+    <ClCompile Include="src\Intersection2D.cpp" />
+    <ClCompile Include="src\Level.cpp" />
+    <ClCompile Include="src\Matrix2DStudent.cpp" />
+    <ClCompile Include="src\MeshHelper.cpp" />
+    <ClCompile Include="src\PointCollider.cpp" />
+    <ClCompile Include="src\Polygon.cpp" />
+    <ClCompile Include="src\PolygonCollider.cpp" />
+    <ClCompile Include="src\RigidBody.cpp" />
+    <ClCompile Include="src\SoundManager.cpp" />
+    <ClCompile Include="src\Space.cpp" />
+    <ClCompile Include="src\Sprite.cpp" />
+    <ClCompile Include="src\SpriteSource.cpp" />
+    <ClCompile Include="src\SpriteTilemap.cpp" />
+    <ClCompile Include="src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Tilemap.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

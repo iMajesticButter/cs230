@@ -161,7 +161,7 @@ void PolygonCollider::TransformVerts() const {
 
         Beta::Vector2D extents(0, 0);
 
-        for (int i = 0; i < m_transformedVerts.Size(); ++i) {
+        for (size_t i = 0; i < m_transformedVerts.Size(); ++i) {
             float xDist = std::abs(center.x - m_transformedVerts[i].x);
             float yDist = std::abs(center.y - m_transformedVerts[i].y);
             if (xDist > extents.x) {
