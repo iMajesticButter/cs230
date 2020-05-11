@@ -61,7 +61,7 @@ int Tilemap::GetCellValue(unsigned column, unsigned row) const {
     if (column > m_numColumns || row > m_numRows)
         return -1;
 
-    return m_data[row][column];
+    return m_data[column][row];
 }
 
 std::string Tilemap::m_mapPath = "/Levels/";
@@ -172,7 +172,7 @@ int** Tilemap::ReadArrayVariable(std::ifstream& file, const std::string& name, u
             //read data from file and store it in dat
             for (unsigned i = 0; i < rows; ++i) {
                 for (unsigned j = 0; j < columns; ++j) {
-                    if (!(file >> dat[i][j])) {
+                    if (!(file >> dat[j][i])) {
                         //error
                         for (unsigned c = 0; c < columns; ++c) {
                             delete[] dat[c];
